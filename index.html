@@ -36,7 +36,7 @@
     }
     .button {
       display: block;
-      margin: 16px 0;
+      margin: 18px 0;
       padding: 14px 16px;
       border-radius: 12px;
       background: #111;
@@ -44,10 +44,6 @@
       text-decoration: none;
       text-align: center;
       font-weight: 600;
-    }
-    .button.secondary {
-      background: #f0f1f3;
-      color: #111;
     }
     .muted {
       color: #666;
@@ -66,10 +62,34 @@
 
     <p>内容包括：今日最重要的 AI 动态、对普通人的影响、对学习者和开发者的建议、对创业者的启发，以及我的判断。</p>
 
-    <a class="button" href="./daily-ai-briefing-latest-mobile.html">阅读最新手机版简报</a>
-    <a class="button secondary" href="./daily-ai-briefing-latest-mobile.pdf">下载最新 PDF</a>
+    <a class="button" id="read-today" href="./daily-ai-briefing-latest-mobile.html">阅读今日 AI 要闻</a>
 
-    <p class="muted">每日自动生成并持续更新。内容仅供学习、观察和信息参考。</p>
+    <p class="muted" id="today-text">每日自动生成并持续更新。内容仅供学习、观察和信息参考。</p>
   </main>
+
+  <script>
+    function getBeijingDateString() {
+      const parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Asia/Shanghai',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      }).formatToParts(new Date());
+
+      const year = parts.find(p => p.type === 'year').value;
+      const month = parts.find(p => p.type === 'month').value;
+      const day = parts.find(p => p.type === 'day').value;
+
+      return `${year}-${month}-${day}`;
+    }
+
+    const today = getBeijingDateString();
+    const compactDate = today.replaceAll('-', '');
+    const todayUrl = `./daily-ai-briefing-${today}-mobile.html?t=${compactDate}`;
+
+    document.getElementById('read-today').href = todayUrl;
+    document.getElementById('today-text').textContent =
+      `今日简报日期：${today}。每日自动生成并持续更新，内容仅供学习、观察和信息参考。`;
+  </script>
 </body>
 </html>
