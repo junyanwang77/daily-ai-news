@@ -9,227 +9,163 @@
   body {
     margin: 0;
     padding: 16px;
-    background-color: #f5f5f7;
+    background: #f5f6f8;
     color: #1a1a1a;
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
     font-size: 17px;
     line-height: 1.75;
     word-wrap: break-word;
     overflow-wrap: break-word;
   }
-  .container {
-    max-width: 720px;
-    width: 100%;
-    margin: 0 auto;
-  }
-  h1 {
-    font-size: 24px;
-    margin: 8px 0 4px;
-    color: #111;
-  }
-  h2 {
-    font-size: 20px;
-    margin: 28px 0 12px;
-    padding-bottom: 6px;
-    border-bottom: 2px solid #ddd;
-    color: #111;
-  }
-  h3 {
-    font-size: 18px;
-    margin: 0 0 8px;
-    color: #111;
-  }
-  .meta {
-    color: #555;
-    font-size: 15px;
-    margin: 2px 0;
-  }
-  .conclusion {
-    background: #eef4ff;
-    border-left: 4px solid #3366cc;
-    border-radius: 8px;
+  .container { max-width: 720px; margin: 0 auto; width: 100%; }
+  h1 { font-size: 24px; margin-bottom: 4px; }
+  h2 { font-size: 20px; margin-top: 28px; border-left: 4px solid #2563eb; padding-left: 8px; }
+  h3 { font-size: 18px; margin-bottom: 8px; }
+  .meta { color: #555; font-size: 15px; margin-bottom: 16px; }
+  .summary, .section {
+    background: #fff;
+    border-radius: 10px;
     padding: 14px 16px;
-    margin: 12px 0;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
   }
   .card {
-    background: #ffffff;
+    background: #fff;
     border-radius: 10px;
-    padding: 16px;
-    margin: 12px 0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-  }
-  .card p {
-    margin: 6px 0;
-  }
-  .label {
-    font-weight: 600;
-    color: #333;
-  }
-  .tag {
-    display: inline-block;
-    background: #e6f0ff;
-    color: #2255aa;
-    border-radius: 6px;
-    padding: 2px 8px;
-    font-size: 14px;
-    margin-right: 4px;
-  }
-  a {
-    color: #1a56db;
-    word-break: break-all;
-    overflow-wrap: anywhere;
-  }
-  ul, ol {
-    padding-left: 22px;
-    margin: 8px 0;
-  }
-  li {
-    margin-bottom: 8px;
-  }
-  .judge {
-    background: #fff7e6;
-    border-left: 4px solid #e6a23c;
-    border-radius: 8px;
     padding: 14px 16px;
-    margin: 12px 0;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border-left: 4px solid #2563eb;
   }
-  .sources {
-    background: #ffffff;
+  .card h3 { margin-top: 0; }
+  .card p { margin: 6px 0; }
+  .label { font-weight: 600; color: #2563eb; }
+  a { color: #2563eb; word-break: break-all; overflow-wrap: anywhere; }
+  ul, ol { padding-left: 20px; }
+  li { margin-bottom: 8px; }
+  .verdict {
+    background: #fff7e6;
+    border-left: 4px solid #f59e0b;
     border-radius: 10px;
-    padding: 16px;
-    margin: 12px 0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    padding: 14px 16px;
+    margin-bottom: 14px;
   }
-  .sources ul {
-    padding-left: 18px;
-  }
-  hr {
-    border: none;
-    border-top: 1px solid #ddd;
-    margin: 16px 0;
-  }
-  footer {
-    text-align: center;
-    color: #999;
-    font-size: 13px;
-    margin: 24px 0 12px;
-  }
+  .footnote { font-size: 14px; color: #777; }
+  hr { border: none; border-top: 1px solid #e5e7eb; margin: 20px 0; }
 </style>
 </head>
 <body>
 <div class="container">
 
-  <h1>每日 AI 要闻</h1>
-  <p class="meta">日期：2026-06-13</p>
-  <p class="meta">生成时间：09:30</p>
-  <p class="meta">覆盖范围：过去 24 小时</p>
+<h1>每日 AI 要闻</h1>
+<div class="meta">
+日期：2026-06-13<br>
+覆盖范围：过去 24 小时<br>
+版本：当日自动生成版
+</div>
 
-  <h2>先说结论</h2>
-  <div class="conclusion">
-    <p>OpenAI 宣布收购云端开发平台 Ona 以强化 Codex 的长任务自主代理能力，同一时间 NVIDIA 与澹（SharonAI）签下近 49 亿美元的算力大单，显示全球 AI 竞争正从"模型参数竞赛"转向"代理执行能力 + 算力基建"的新阶段。</p>
-    <p>这一转变值得关注，因为它意味着 AI 产品的护城河正在从"模型聪明不聪明"扩展到"能不能脱离人、长时间、可靠地完成真实工作"，同时 DeepSeek 传出可能接受腾讯、阿里首次外部投资的消息，预示中国大模型格局可能迎来新一轮整合。</p>
-    <p>对普通人、学习者和开发者而言，今天的信息共同指向一个趋势：AI 工具正从"对话框里的助手"变成"在云端独立运行的数字员工"，而能用上这些工具、理解其边界的人会更早获得效率红利。</p>
-  </div>
+<div class="summary">
+<h2 style="margin-top:0;border-left:none;padding-left:0;">先说结论</h2>
+<p>今天最重要的事件是：OpenAI、Anthropic、Google DeepMind 三家公司的 CEO 将首次同时现身法国 G7 峰会，同一时间 NVIDIA 被曝已向中国客户启动新一代“智能体 AI”芯片 Vera 的销售推介。这两件事值得关注，因为它们说明 AI 竞争正从单纯的“模型实力比拼”扩展到“全球治理话语权”和“芯片地缘政治”两个新战场——AI 公司开始直接参与国际规则制定，芯片巨头则在中美科技管制的缝隙中寻找新平衡。对普通人、学习者和开发者来说，这些变化不会立刻出现在你的手机 App 里，但会决定未来 AI 产品的监管环境、价格和算力供给速度；与此同时，Anthropic 刚开放的旗舰模型 Claude Fable 5 仍可免费试用至 6 月 22 日，是亲身体验顶级 AI 能力的难得窗口。</p>
+</div>
 
-  <h2>今日最值得关注的 5 件事</h2>
+<h2>今日最值得关注的 5 件事</h2>
 
-  <div class="card">
-    <h3>1. OpenAI 收购云端开发平台 Ona，强化 Codex 长任务代理能力</h3>
-    <p><span class="label">来源：</span>OpenAI 官方公告 / Bloomberg</p>
-    <p><span class="label">链接：</span><a href="https://openai.com/index/openai-to-acquire-ona/">openai.com/index/openai-to-acquire-ona</a></p>
-    <p><span class="label">发生了什么：</span>OpenAI 于 6 月 11 日宣布收购德国云端开发平台 Ona，将其安全云端执行与编排技术整合进 Codex 生态。Ona 此前已帮助约 200 万开发者在安全、可复现的云端环境中工作，交易仍需完成常规监管审批。</p>
-    <p><span class="label">为什么重要：</span>随着 Codex 能承担耗时数小时甚至数天的真实开发任务，OpenAI 希望用户无需守着本地电脑就能委托 AI 完成更复杂的工程工作。OpenAI 透露 Codex 每周活跃用户已达 500 万，较年初增长 400%。</p>
-    <p><span class="label">影响对象：</span><span class="tag">开发者</span><span class="tag">创业者</span><span class="tag">企业</span></p>
-    <p><span class="label">重要性评分：</span>8</p>
-    <p><span class="label">可信度：</span>高</p>
-  </div>
+<div class="card">
+<h3>1. Anthropic 发布 Claude Fable 5 与 Claude Mythos 5，首个“Mythos 级”模型向公众开放</h3>
+<p><span class="label">来源：</span>Anthropic 官方公告 / TechCrunch</p>
+<p><span class="label">链接：</span><a href="https://www.anthropic.com/news/claude-fable-5-mythos-5">https://www.anthropic.com/news/claude-fable-5-mythos-5</a></p>
+<p><span class="label">发生了什么：</span>6 月 9 日 Anthropic 推出 Claude Fable 5 和 Claude Mythos 5。Fable 5 是面向公众开放的“Mythos 级”旗舰模型，定价 10/50 美元每百万输入/输出 token，在 SWE-Bench Pro 上约达 80%；Mythos 5 仅限网络安全计划 Project Glasswing 内的受邀机构使用。Pro/Max/Team/企业用户可免费试用 Fable 5 至 6 月 22 日，之后需消耗额度。</p>
+<p><span class="label">为什么重要：</span>这是 Anthropic 目前最强的公开模型，代表顶尖编程与智能体能力首次大规模向普通用户开放，免费试用期是低成本体验顶级模型的窗口。</p>
+<p><span class="label">影响对象：</span>AI 学习者 / 开发者 / 企业</p>
+<p><span class="label">重要性评分：</span>9</p>
+<p><span class="label">可信度：</span>高</p>
+</div>
 
-  <div class="card">
-    <h3>2. NVIDIA 在澳大利亚签下近 49 亿美元算力大单，同时传将向中国供应新一代 Vera CPU</h3>
-    <p><span class="label">来源：</span>NVIDIA Newsroom / TipRanks / GuruFocus</p>
-    <p><span class="label">链接：</span><a href="https://www.tipranks.com/news/company-announcements/sharonai-announces-major-nvidia-cloud-compute-partnership">tipranks.com/.../sharonai-announces-major-nvidia-cloud-compute-partnership</a></p>
-    <p><span class="label">发生了什么：</span>6 月 12 日，SharonAI 与 NVIDIA 签署为期六年、最高 48.8 亿美元的算力合作协议，将在澳大利亚部署最多 4 万块 Grace Blackwell GB300 GPU，使其 AI 工厂总容量提升至 132MW。同时有媒体报道称，NVIDIA 新一代面向 AI 数据中心的 Vera CPU 最早将于 8 月起向中国客户供货。</p>
-    <p><span class="label">为什么重要：</span>前者反映全球 AI 算力建设仍在加速扩张；后者若属实，则意味着 NVIDIA 在中美芯片管制的拉锯中正尝试重新打开中国市场，将直接影响中国厂商的算力获取成本。</p>
-    <p><span class="label">影响对象：</span><span class="tag">企业</span><span class="tag">投资者</span><span class="tag">创业者</span></p>
-    <p><span class="label">重要性评分：</span>7</p>
-    <p><span class="label">可信度：</span>中（对华芯片供货消息来自媒体报道，尚未获 NVIDIA 官方正式确认，标注为未完全核实）</p>
-  </div>
+<div class="card">
+<h3>2. OpenAI、Anthropic、Google DeepMind 三巨头 CEO 将齐聚法国 G7 峰会，OpenAI 营收与 IPO 进程同步推进</h3>
+<p><span class="label">来源：</span>Bloomberg / Dataconomy</p>
+<p><span class="label">链接：</span><a href="https://dataconomy.com/2026/06/12/ai-leaders-openai-google-deepmind-anthropic-g7-summit/">https://dataconomy.com/2026/06/12/ai-leaders-openai-google-deepmind-anthropic-g7-summit/</a></p>
+<p><span class="label">发生了什么：</span>6 月 12 日消息称，Sam Altman、Demis Hassabis、Dario Amodei 将于 6 月 15-17 日出席在法国埃维昂举行的 G7 峰会，这是三大 AI 公司首次同时现身 G7。报道同时提到 OpenAI 年化营收已突破 250 亿美元并在筹划年内 IPO，Anthropic 年化营收接近 190 亿美元。</p>
+<p><span class="label">为什么重要：</span>AI 高管与七国集团领导人直接对话，意味着 AI 安全与治理规则将进入全球最高级别政策议程，也会影响资本市场对 AI 行业的估值参照。</p>
+<p><span class="label">影响对象：</span>投资者 / 企业 / 创业者</p>
+<p><span class="label">重要性评分：</span>8</p>
+<p><span class="label">可信度：</span>中（G7 出席为媒体广泛报道，营收数字来自媒体估算，未经公司官方逐项确认，标注为未完全核实）</p>
+</div>
 
-  <div class="card">
-    <h3>3. 传腾讯、阿里洽谈投资 DeepSeek，估值或翻倍至 200 亿美元以上</h3>
-    <p><span class="label">来源：</span>36氪 / 澎湃新闻</p>
-    <p><span class="label">链接：</span><a href="https://eu.36kr.com/zh/p/3780311441306369">eu.36kr.com/zh/p/3780311441306369</a></p>
-    <p><span class="label">发生了什么：</span>据多家中国财经媒体报道，腾讯控股与阿里巴巴正在洽谈对 DeepSeek 的投资，其目标估值从最初的至少 100 亿美元上调至超过 200 亿美元，这将是 DeepSeek 成立以来首次引入外部资本。</p>
-    <p><span class="label">为什么重要：</span>DeepSeek 一直坚持不融资、靠开源策略扩大影响力，但其模型在最新基准测试中已不再领先，智谱、MiniMax、月之暗面等竞争对手营收快速增长，商业化压力可能促使其立场转变，预示中国大模型市场可能迎来新一轮资本整合。</p>
-    <p><span class="label">影响对象：</span><span class="tag">投资者</span><span class="tag">创业者</span><span class="tag">企业</span></p>
-    <p><span class="label">重要性评分：</span>8</p>
-    <p><span class="label">可信度：</span>中（消息来自媒体报道，双方尚未官方确认，未完全核实）</p>
-  </div>
+<div class="card">
+<h3>3. NVIDIA 被曝已向中国客户推介新一代智能体 AI 芯片“Vera CPU”，最早 8 月供货</h3>
+<p><span class="label">来源：</span>路透社 / U.S. News</p>
+<p><span class="label">链接：</span><a href="https://www.usnews.com/news/top-news/articles/2026-06-12/exclusive-nvidia-begins-vera-cpu-sales-pitch-to-chinese-clients-sources-say">https://www.usnews.com/news/top-news/articles/2026-06-12/exclusive-nvidia-begins-vera-cpu-sales-pitch-to-chinese-clients-sources-say</a></p>
+<p><span class="label">发生了什么：</span>路透社 6 月 12 日援引消息人士称，NVIDIA 已开始向中国客户推介新一代 AI 数据中心 CPU “Vera”，最早 8 月可供货并已开始接单。Vera 是 NVIDIA 首款专为“智能体 AI”设计的独立 CPU。</p>
+<p><span class="label">为什么重要：</span>此前 NVIDIA 对华 H200 芯片出货已停滞数月，这一动作显示其正加速重返中国市场，同时加剧与 Intel、AMD 在 AI 服务器 CPU 上的竞争；若落地，对中国 AI 企业的算力获取可能是边际利好。</p>
+<p><span class="label">影响对象：</span>企业 / 投资者 / 创业者</p>
+<p><span class="label">重要性评分：</span>7</p>
+<p><span class="label">可信度：</span>中（基于消息人士报道，NVIDIA 尚未官方确认，标注为未完全核实）</p>
+</div>
 
-  <div class="card">
-    <h3>4. OpenAI、Anthropic、Google DeepMind 高管出席法国 G7 峰会，IPO 进程同步推进</h3>
-    <p><span class="label">来源：</span>Bloomberg</p>
-    <p><span class="label">链接：</span><a href="https://www.bloomberg.com/news/articles/2026-06-12/anthropic-openai-google-executives-plan-to-attend-g7-summit">bloomberg.com/.../anthropic-openai-google-executives-plan-to-attend-g7-summit</a></p>
-    <p><span class="label">发生了什么：</span>OpenAI 的 Sam Altman、Google DeepMind 的 Demis Hassabis、Anthropic 的 Dario Amodei 等高管将出席在法国举行的 G7 峰会；与此同时，OpenAI 和 Anthropic 已分别向美国证监会提交保密的 S-1 上市草案，三家公司合计估值已接近 4 万亿美元。</p>
-    <p><span class="label">为什么重要：</span>AI 巨头与七国集团政府的直接互动，意味着 AI 治理与监管议题将进入更高级别的政策议程；而两家头部 AI 公司同步推进 IPO，可能在未来数月重塑资本市场对 AI 行业的估值逻辑和监管态度。</p>
-    <p><span class="label">影响对象：</span><span class="tag">投资者</span><span class="tag">企业</span><span class="tag">创业者</span></p>
-    <p><span class="label">重要性评分：</span>7</p>
-    <p><span class="label">可信度：</span>高</p>
-  </div>
+<div class="card">
+<h3>4. 传腾讯、阿里洽谈投资 DeepSeek，估值版本从 200 亿到 450 亿美元不一，阿里此前曾否认</h3>
+<p><span class="label">来源：</span>The Information / Seeking Alpha / 36氪</p>
+<p><span class="label">链接：</span><a href="https://seekingalpha.com/news/4577717-alibaba-tencent-may-invest-in-deepseek-at-20b-valuation-report">https://seekingalpha.com/news/4577717-alibaba-tencent-may-invest-in-deepseek-at-20b-valuation-report</a></p>
+<p><span class="label">发生了什么：</span>多家媒体持续报道腾讯、阿里正洽谈对 DeepSeek 的首轮外部投资，估值传闻版本不一：4 月报道为 200 亿美元以上，5 月一度传出“国家大基金”领投、估值冲至 450 亿美元；但阿里方面已公开否认相关投资计划。</p>
+<p><span class="label">为什么重要：</span>若交易成真，将是 DeepSeek 成立以来首次引入外部资本，标志其“零融资、纯开源”路线可能松动，折射出中国大模型市场正从“百模大战”走向资本整合期；但目前各方说法相互矛盾，需持续观察。</p>
+<p><span class="label">影响对象：</span>投资者 / 创业者 / 企业</p>
+<p><span class="label">重要性评分：</span>6</p>
+<p><span class="label">可信度：</span>低（多版本报道相互矛盾，当事方已部分否认，明确标注未完全核实）</p>
+</div>
 
-  <div class="card">
-    <h3>5. Hugging Face 趋势榜：中国开源大模型集中爆发，占据下载榜半数席位</h3>
-    <p><span class="label">来源：</span>Hugging Face / Presenc AI</p>
-    <p><span class="label">链接：</span><a href="https://presenc.ai/research/huggingface-trending-models-june-2026">presenc.ai/research/huggingface-trending-models-june-2026</a></p>
-    <p><span class="label">发生了什么：</span>Hugging Face 6 月趋势榜显示，DeepSeek V4.1 Flash、Qwen 3.7、GLM-6、字节豆包 Pro、腾讯混元 Large 3、百度文心 ERNIE 5.1 等六款中国大模型在两周内集中发布，占据下载榜前十中的五个席位，创历史最高集中度；Google Gemma 4 因 Apache 2.0 商用友好许可仍保持前三。</p>
-    <p><span class="label">为什么重要：</span>开源大模型的竞争重心进一步向中国厂商倾斜，为全球开发者提供了更多低成本、可商用、可本地部署的模型选择，同时也加剧了开源生态格局的变化。</p>
-    <p><span class="label">影响对象：</span><span class="tag">AI 学习者</span><span class="tag">开发者</span><span class="tag">创业者</span></p>
-    <p><span class="label">重要性评分：</span>6</p>
-    <p><span class="label">可信度：</span>中</p>
-  </div>
+<div class="card">
+<h3>5. OpenAI 收购云端开发平台 Ona，强化 Codex 长任务代理能力</h3>
+<p><span class="label">来源：</span>OpenAI 官方公告</p>
+<p><span class="label">链接：</span><a href="https://openai.com/index/openai-to-acquire-ona/">https://openai.com/index/openai-to-acquire-ona/</a></p>
+<p><span class="label">发生了什么：</span>6 月 11 日 OpenAI 宣布收购云端开发平台 Ona，将其安全云端执行与编排技术整合进 Codex，用于支持可长时间在云端独立运行的编程智能体；OpenAI 同时披露 Codex 周活跃用户已达 500 万，较年初增长约 4 倍。</p>
+<p><span class="label">为什么重要：</span>这笔收购显示 AI 巨头的竞争重心正从“模型参数”转向“智能体能否长时间、可靠地独立完成真实工作”，也为做 AI 代理执行环境、安全沙箱的创业公司提供了参考路径。</p>
+<p><span class="label">影响对象：</span>开发者 / 创业者 / 企业</p>
+<p><span class="label">重要性评分：</span>7</p>
+<p><span class="label">可信度：</span>高</p>
+</div>
 
-  <h2>对普通人的影响</h2>
-  <div class="card">
-    <p>今天的新闻大多发生在"幕后"——公司收购、芯片合同、上市准备——短期内你不会立刻感觉到变化。但有两点和你有关：第一，AI 编程工具（比如 OpenAI 的 Codex）正在变得能"自己干活"，未来你身边做技术工作的朋友、家人可能会用更少的人力完成更多软件项目，这会逐渐影响就业市场和产品迭代速度；第二，DeepSeek 等中国开源模型如果获得腾讯、阿里这样的大公司投资，意味着你日常使用的免费或低价 AI 应用（聊天、翻译、写作工具）背后的模型会持续变强、变便宜，普通人用 AI 的门槛会进一步降低。简单说：AI 离"能自主干活的数字员工"又近了一步，而它会通过你用的各种 App，悄悄变得更聪明、更便宜。</p>
-  </div>
+<div class="section">
+<h2 style="margin-top:0;">对普通人的影响</h2>
+<p>今天的新闻大多发生在“幕后”——峰会外交、芯片销售、公司融资传闻——短期内你不会直接感觉到变化。但有两点和你有关：第一，Anthropic 的最强模型 Claude Fable 5 现在对所有 Pro/Max 用户免费开放到 6 月 22 日，如果你平时用 Claude，这几天可以体验目前最聪明的 AI 之一；第二，AI 公司高管开始直接参与 G7 这种国际峰会，说明各国政府正在加快制定 AI 使用和安全的规则，未来你用的 AI 产品可能会因为这些规则而变得更安全，但也可能在某些功能上更受限。简单说：这一周是普通人“低成本试用顶级 AI”的好时机，背后则是全球规则和供应链正在重新洗牌。</p>
+</div>
 
-  <h2>对学习者 / 开发者的影响</h2>
-  <div class="card">
-    <ol>
-      <li>关注 OpenAI Codex + Ona 整合后的新能力：当 Codex 支持"关闭电脑也能继续跑"的长时间云端任务时，提前学习如何拆解任务、写清晰的任务说明书，会是未来使用 AI 编程代理的核心技能。</li>
-      <li>试用 DeepSeek-V4 / V4.1 系列（百万级上下文、MIT 开源）：可以在本地或低成本云端部署，体验"超长上下文 + 智能体任务"的组合，特别适合做长文档分析、代码库级理解类项目。</li>
-      <li>留意 Hugging Face 上的 Qwen 3.7、GLM-6、Gemma 4（Apache 2.0 许可）：这些模型商用友好、下载量领先，适合作为个人项目或创业 MVP 的底层模型，对比测试它们在自己业务场景上的效果和成本差异。</li>
-    </ol>
-  </div>
+<div class="section">
+<h2 style="margin-top:0;">对学习者 / 开发者的影响</h2>
+<ol>
+<li>抓紧免费窗口测试 Claude Fable 5：它在 SWE-Bench Pro 上约 80%，是目前公开可用的顶尖编程/智能体模型之一，6 月 22 日后将转为按额度计费，建议这几天用真实项目测一下它的代码理解和长任务表现。</li>
+<li>研究 OpenAI Codex + Ona 的云端代理工作流：当编程代理可以“脱离本地电脑”长时间运行时，学会把任务拆解成清晰、可独立验收的子任务说明书，会是未来用好 AI 代理的核心技能。</li>
+<li>关注国产大模型（DeepSeek、Qwen、GLM 等）在国产芯片上的部署方案：如果 NVIDIA Vera 真的对华供货，短期内对算力成本和模型选择都会有影响，提前了解不同芯片/模型组合的性价比，对做项目选型很有帮助。</li>
+</ol>
+</div>
 
-  <h2>对创业者的影响</h2>
-  <div class="card">
-    <ol>
-      <li>"AI 代理基础设施"是新机会窗口：OpenAI 收购 Ona 说明，连巨头都需要外部的云端执行/编排能力来支撑代理产品，做"AI 代理运行环境、安全沙箱、任务编排"的工具型创业公司仍有空间。</li>
-      <li>开源模型成本持续下降，重新评估"自建模型 vs 调用 API"：DeepSeek、Qwen、GLM 等中国开源模型质量逼近一线，且授权宽松，如果你的产品对模型依赖度高，现在是重新做成本结构测算的好时机。</li>
-      <li>警惕平台与资本格局的快速变化：DeepSeek 若引入腾讯、阿里资本，其开源策略和定价可能改变；OpenAI、Anthropic 推进 IPO 也可能带来 API 定价、政策的调整。依赖单一大厂模型的创业者，应提前规划多模型、多供应商的备选方案，降低平台风险。</li>
-    </ol>
-  </div>
+<div class="section">
+<h2 style="margin-top:0;">对创业者的影响</h2>
+<ol>
+<li>“AI 代理基础设施”仍是窗口期：OpenAI 收购 Ona 说明，即使是巨头也需要外部的云端执行、编排能力来支撑代理产品，做代理运行环境、安全沙箱、任务编排工具的创业公司仍有空间。</li>
+<li>中国大模型的资本格局可能重构：DeepSeek 是否真的引入腾讯、阿里资本目前仍不确定，但一旦发生，其开源免费策略和定价可能改变，重度依赖开源模型的产品应提前评估“自建 vs 调用 API”的成本结构。</li>
+<li>算力供给的边际变化值得跟踪：NVIDIA Vera 若真向中国供货，短期内可能缓解国内算力紧张，但芯片地缘政治仍充满不确定性，依赖单一供应商的创业者应保留多芯片/多云的备选方案。</li>
+</ol>
+</div>
 
-  <h2>我的判断</h2>
-  <div class="judge">
-    <p>我的判断：今天最值得关注的趋势不是某个新模型，而是"代理基础设施"正在成为新的竞争焦点——OpenAI 用收购补齐云端执行能力，NVIDIA 用大额算力合同绑定客户，本质上都是在为"AI 能自主跑长任务"这件事铺路。相比之下，单纯的模型参数和榜单排名已经不是决定胜负的关键。另一条线索是 DeepSeek 可能接受腾讯、阿里投资（未完全核实），如果成真，意味着"开源免费打法"在商业现实面前开始松动，中国大模型格局可能从"百模大战"走向资本主导的整合期。对开发者和创业者来说，现在更该关注的是"能不能把 AI 用在真实、长周期的工作流里"，而不是追逐下一个跑分第一的模型。</p>
-  </div>
+<div class="verdict">
+<h2 style="margin-top:0;border-left:none;padding-left:0;">我的判断</h2>
+<p>我的判断：今天最值得关注的趋势不是某条单独的新闻，而是 AI 竞争的“战场”正在扩散——从模型跑分，扩散到国际治理（G7）、芯片地缘政治（Vera 对华）和资本格局（DeepSeek 融资传闻）。这意味着未来 AI 产品的价格、能力边界和合规要求，将越来越多地由“谁在谈判桌上”决定，而不只是“谁的模型更强”。其中 DeepSeek 融资消息多版本互相矛盾且被部分否认，可信度偏低，不建议据此做任何实际决策。相比之下，Claude Fable 5 的免费试用窗口是今天唯一可以立刻“动手验证”的信息，开发者应优先利用这一点，而不是被各种宏观传闻牵着走。</p>
+</div>
 
-  <h2>来源链接</h2>
-  <div class="sources">
-    <ul>
-      <li><a href="https://openai.com/index/openai-to-acquire-ona/">OpenAI to acquire Ona</a></li>
-      <li><a href="https://www.bloomberg.com/news/articles/2026-06-12/anthropic-openai-google-executives-plan-to-attend-g7-summit">Anthropic, OpenAI, Google Executives to Join G7 Summit in France - Bloomberg</a></li>
-      <li><a href="https://www.tipranks.com/news/company-announcements/sharonai-announces-major-nvidia-cloud-compute-partnership">SharonAI Announces Major NVIDIA Cloud Compute Partnership - TipRanks</a></li>
-      <li><a href="https://www.gurufocus.com/news/8913801/nvidia-nvda-set-to-supply-new-ai-processors-to-china-customers-starting-august">Nvidia Set to Supply New AI Processors to China Customers Starting August - GuruFocus</a></li>
-      <li><a href="https://eu.36kr.com/zh/p/3780311441306369">DeepSeek一夜估值翻倍！未亮出估值的下一批才真正值得留意 - 36氪</a></li>
-      <li><a href="https://presenc.ai/research/huggingface-trending-models-june-2026">Hugging Face Trending Models June 2026 - Presenc AI</a></li>
-      <li><a href="https://api-docs.deepseek.com/news/news260424">DeepSeek-V4 Preview Release - DeepSeek API Docs</a></li>
-    </ul>
-  </div>
-
-  <footer>每日 AI 要闻 · 2026-06-13 · 自动生成</footer>
+<div class="section">
+<h2 style="margin-top:0;">来源链接</h2>
+<ul>
+<li><a href="https://www.anthropic.com/news/claude-fable-5-mythos-5">Claude Fable 5 and Claude Mythos 5 - Anthropic</a></li>
+<li><a href="https://techcrunch.com/2026/06/09/anthropics-claude-fable-5-is-a-version-of-mythos-the-public-can-access-today/">Anthropic's Claude Fable 5 is a version of Mythos the public can access today - TechCrunch</a></li>
+<li><a href="https://dataconomy.com/2026/06/12/ai-leaders-openai-google-deepmind-anthropic-g7-summit/">AI Leaders From OpenAI, Google DeepMind, And Anthropic To Join G7 Summit - Dataconomy</a></li>
+<li><a href="https://www.usnews.com/news/top-news/articles/2026-06-12/exclusive-nvidia-begins-vera-cpu-sales-pitch-to-chinese-clients-sources-say">Exclusive-Nvidia Begins Vera CPU Sales Pitch to Chinese Clients - U.S. News (Reuters)</a></li>
+<li><a href="https://seekingalpha.com/news/4577717-alibaba-tencent-may-invest-in-deepseek-at-20b-valuation-report">Alibaba, Tencent may invest in DeepSeek at $20B valuation: report - Seeking Alpha</a></li>
+<li><a href="https://www.theinformation.com/articles/tencent-alibaba-talks-invest-deepseek-20-billion-plus-valuation">Tencent, Alibaba in Talks to Invest in DeepSeek at $20 Billion-Plus Valuation - The Information</a></li>
+<li><a href="https://openai.com/index/openai-to-acquire-ona/">OpenAI to acquire Ona - OpenAI</a></li>
+</ul>
+</div>
 
 </div>
 </body>
