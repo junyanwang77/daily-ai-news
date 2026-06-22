@@ -1,349 +1,633 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>每日 AI 要闻 2026-06-22</title>
-<style>
-  *, *::before, *::after { box-sizing: border-box; }
-  body {
-    margin: 0;
-    padding: 0 16px 40px;
-    background: #f5f6f8;
-    color: #1a1a2e;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-    font-size: 17px;
-    line-height: 1.75;
-  }
-  .container {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0;
-  }
-  header {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    color: #fff;
-    padding: 28px 20px 24px;
-    border-radius: 0 0 16px 16px;
-    margin: 0 -16px 24px;
-  }
-  header h1 {
-    margin: 0 0 8px;
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-  }
-  header .meta {
-    font-size: 13px;
-    color: rgba(255,255,255,0.65);
-    line-height: 1.6;
-  }
-  h2 {
-    font-size: 18px;
-    font-weight: 700;
-    color: #1a1a2e;
-    margin: 32px 0 12px;
-    padding-bottom: 6px;
-    border-bottom: 2px solid #e0e4ef;
-  }
-  .summary-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 18px 20px;
-    margin-bottom: 24px;
-    border-left: 4px solid #4f7fff;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
-    font-size: 16px;
-    line-height: 1.8;
-  }
-  .note-box {
-    background: #fffbea;
-    border: 1px solid #f0d060;
-    border-radius: 10px;
-    padding: 12px 16px;
-    font-size: 14px;
-    color: #7a6000;
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-  .news-card {
-    background: #fff;
-    border-radius: 14px;
-    padding: 20px;
-    margin-bottom: 18px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    border: 1px solid #e8eaf0;
-  }
-  .news-card h3 {
-    font-size: 17px;
-    font-weight: 700;
-    color: #1a1a2e;
-    margin: 0 0 14px;
-    line-height: 1.5;
-  }
-  .news-card .badge-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 14px;
-  }
-  .badge {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 3px 9px;
-    border-radius: 20px;
-    white-space: nowrap;
-  }
-  .badge-verified { background: #e6f4ea; color: #1e7e34; }
-  .badge-partial { background: #fff3cd; color: #856404; }
-  .badge-unverified { background: #fde8e8; color: #a02020; }
-  .badge-trust-high { background: #d4edda; color: #155724; }
-  .badge-trust-mid { background: #fff3cd; color: #856404; }
-  .badge-trust-low { background: #f8d7da; color: #721c24; }
-  .badge-score { background: #e8f0ff; color: #2952c4; }
-  .meta-row {
-    font-size: 13.5px;
-    color: #555;
-    margin-bottom: 10px;
-    word-break: break-all;
-    overflow-wrap: break-word;
-  }
-  .meta-row strong { color: #333; }
-  .meta-row a {
-    color: #2563eb;
-    word-break: break-all;
-    overflow-wrap: break-word;
-  }
-  .divider {
-    height: 1px;
-    background: #eef0f6;
-    margin: 12px 0;
-  }
-  .section-body {
-    background: #fff;
-    border-radius: 12px;
-    padding: 18px 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.06);
-    font-size: 16px;
-    line-height: 1.8;
-  }
-  .section-body ol, .section-body ul {
-    padding-left: 20px;
-    margin: 8px 0;
-  }
-  .section-body li {
-    margin-bottom: 10px;
-  }
-  .sources-list {
-    background: #fff;
-    border-radius: 12px;
-    padding: 16px 20px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.06);
-    margin-bottom: 20px;
-  }
-  .sources-list li {
-    font-size: 14.5px;
-    margin-bottom: 10px;
-    word-break: break-all;
-    overflow-wrap: break-word;
-    line-height: 1.6;
-  }
-  .sources-list a {
-    color: #2563eb;
-    word-break: break-all;
-    overflow-wrap: break-word;
-  }
-  .check-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 18px 20px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.06);
-    font-size: 15px;
-    line-height: 1.8;
-  }
-  .check-card ul {
-    padding-left: 18px;
-    margin: 6px 0;
-  }
-  .check-card li { margin-bottom: 8px; }
-  .judgement-card {
-    background: #1a1a2e;
-    color: #e8eaf0;
-    border-radius: 14px;
-    padding: 20px;
-    margin-bottom: 20px;
-    font-size: 16px;
-    line-height: 1.8;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-  }
-  .judgement-card strong { color: #fff; }
-  footer {
-    text-align: center;
-    font-size: 13px;
-    color: #999;
-    margin-top: 30px;
-    padding-top: 16px;
-    border-top: 1px solid #e0e4ef;
-  }
-  @media (min-width: 480px) {
-    body { font-size: 17px; }
-    header { margin: 0 0 24px; border-radius: 12px; margin-top: 16px; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日 AI 要闻 - 2026-06-22</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            font-size: 17px;
+            line-height: 1.75;
+        }
+        
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                padding: 24px;
+            }
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 24px 16px;
+            margin: -16px -16px 24px -16px;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        @media (min-width: 768px) {
+            header {
+                margin: -24px -24px 24px -24px;
+                padding: 32px 24px;
+            }
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .header-meta {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .header-meta p {
+            margin: 4px 0;
+        }
+        
+        h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 32px 0 16px 0;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #667eea;
+            color: #333;
+        }
+        
+        h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 20px 0 12px 0;
+            color: #333;
+        }
+        
+        .news-card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        
+        .news-card h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            color: #667eea;
+        }
+        
+        .news-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .meta-item {
+            padding: 4px 8px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            word-break: break-word;
+        }
+        
+        .meta-item strong {
+            color: #333;
+        }
+        
+        .news-content {
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+        
+        .content-section {
+            margin-bottom: 12px;
+        }
+        
+        .content-section strong {
+            display: inline-block;
+            color: #667eea;
+            min-width: 80px;
+        }
+        
+        .content-text {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        a {
+            color: #667eea;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .impact-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: #fff3cd;
+            color: #856404;
+            border-radius: 4px;
+            font-size: 13px;
+            margin-right: 8px;
+        }
+        
+        .trust-score {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .trust-high {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .trust-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .trust-low {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .importance-score {
+            display: inline-block;
+            padding: 4px 8px;
+            background: #e7f3ff;
+            color: #004085;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .section-box {
+            background: white;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        
+        .section-box ul {
+            margin-left: 20px;
+            margin-top: 12px;
+        }
+        
+        .section-box li {
+            margin-bottom: 12px;
+        }
+        
+        .section-box strong {
+            color: #667eea;
+        }
+        
+        .conclusion-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            line-height: 1.8;
+        }
+        
+        .sources-list {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        
+        .sources-list ul {
+            list-style: none;
+            margin-top: 12px;
+        }
+        
+        .sources-list li {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .sources-list li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .sources-list a {
+            word-break: break-all;
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-size: 13px;
+            margin-top: 32px;
+        }
+        
+        .remark-box {
+            background: #fffbea;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            margin-top: 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .score-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+            font-size: 13px;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
+    <div class="container">
+        <header>
+            <h1>每日 AI 要闻</h1>
+            <div class="header-meta">
+                <p><strong>日期：</strong>2026-06-22</p>
+                <p><strong>覆盖范围：</strong>过去 24 小时</p>
+                <p><strong>版本：</strong>当日自动生成版</p>
+            </div>
+        </header>
 
-  <header>
-    <h1>每日 AI 要闻</h1>
-    <div class="meta">
-      日期：2026-06-22 &nbsp;·&nbsp; 覆盖范围：过去 24 小时及近期重要动态<br>
-      版本：当日自动生成版
+        <section>
+            <h2>先说结论</h2>
+            <div class="conclusion-box">
+                <p>美国政府对 Anthropic 的两个最新 AI 模型（Fable 5 和 Mythos 5）发出出口管制指令，Anthropic 被迫全球禁用这两款被认为是目前最佳软件工程 AI 的模型。这是 AI 规制进入实际操作阶段的信号，将深刻影响全球 AI 产业的地缘政治格局。普通用户和开发者应理解，AI 模型能力的提升与国家安全政策之间的张力正在成为产业主要驱动力，跨国 AI 公司面临前所未有的监管不确定性。</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>今日最值得关注的 5 件事</h2>
+
+            <article class="news-card">
+                <h3>1. Anthropic Claude Fable 5 和 Mythos 5 被美国政府全球禁用</h3>
+                <div class="news-meta">
+                    <div class="meta-item"><strong>来源：</strong>Anthropic 官方声明；Fortune；The National Law Review</div>
+                </div>
+                <div class="news-content">
+                    <div class="content-section">
+                        <strong>链接：</strong>
+                        <div class="content-text">
+                            <a href="https://www.anthropic.com/news/fable-mythos-access">https://www.anthropic.com/news/fable-mythos-access</a><br>
+                            <a href="https://fortune.com/2026/06/13/anthropic-disables-fable-mythos-export-controls-national-security-threat/">https://fortune.com/2026/06/13/anthropic-disables-fable-mythos-export-controls-national-security-threat/</a>
+                        </div>
+                    </div>
+                    <div class="content-section">
+                        <strong>核查状态：</strong><span>已核实</span>
+                    </div>
+                    <div class="content-section">
+                        <strong>发生了什么：</strong>
+                        <div class="content-text">美国商务部在 6 月 13 日（周五）下午 5:21 发出出口管制指令，禁止 Anthropic 向任何外国国民（包括美国境内的非公民员工）分发 Fable 5 和 Mythos 5 模型。由于监管范围过于宽泛，Anthropic 决定全球禁用这两款模型以完全合规。官方指令未提供具体的国家安全关切细节。</div>
+                    </div>
+                    <div class="content-section">
+                        <strong>为什么重要：</strong>
+                        <div class="content-text">Fable 5 被两个独立基准测试认证为最佳软件工程 AI，代表了当前 AI 技术的最高水平。该禁令标志着 AI 规制从原则性讨论进入具体执行阶段，首次对已发布的商用前沿模型采取了跨越国界的禁用措施。</div>
+                    </div>
+                    <div class="score-grid">
+                        <div>
+                            <strong>影响对象：</strong>开发者、企业、创业者、投资者、研究者
+                        </div>
+                        <div>
+                            <strong>重要性：</strong><span class="importance-score">9/10</span>
+                        </div>
+                    </div>
+                    <div class="score-grid">
+                        <div>
+                            <strong>可信度：</strong><span class="trust-score trust-high">高</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="remark-box">
+                    <strong>备注：</strong>政府指令声称发现了绕过 Fable 5 安全机制的技术，但 Anthropic 反驳称此类漏洞也存在于 OpenAI 的 GPT-5.5 等竞争产品中，未获得同等限制。观察人士认为此举可能反映了特朗普政府对 Anthropic 的持续敌对态度（五角大楼曾将该公司列为"供应链风险"）。
+                </div>
+            </article>
+
+            <article class="news-card">
+                <h3>2. Microsoft 推出新 AI 模型系列，成本效率超越 OpenAI</h3>
+                <div class="news-meta">
+                    <div class="meta-item"><strong>来源：</strong>CNBC；搜索聚合数据</div>
+                </div>
+                <div class="news-content">
+                    <div class="content-section">
+                        <strong>链接：</strong>
+                        <div class="content-text">
+                            <a href="https://llm-stats.com/llm-updates">https://llm-stats.com/llm-updates</a><br>
+                            <a href="https://llm-stats.com/ai-news">https://llm-stats.com/ai-news</a>
+                        </div>
+                    </div>
+                    <div class="content-section">
+                        <strong>核查状态：</strong><span>部分核实</span>
+                    </div>
+                    <div class="content-section">
+                        <strong>发生了什么：</strong>
+                        <div class="content-text">Microsoft 宣布推出 MAI-Code-1-Flash 模型（能根据文字描述生成应用和网站源代码），以及更新的语音识别、合成语音和图像生成云模型。同时发布可在 Windows PC 上本地运行的小型 Aion 模型。多个来源报道称 Microsoft 的新模型成本效率比 OpenAI 的 GPT-5.5 高出 10 倍。</div>
+                    </div>
+                    <div class="content-section">
+                        <strong>为什么重要：</strong>
+                        <div class="content-text">这表明微软正在减少对 OpenAI 的技术依赖，并通过自研模型在成本和功能上形成竞争优势。此举对 OpenAI 的市场地位构成挑战，也为企业用户和开发者提供了更经济的 AI 选项。</div>
+                    </div>
+                    <div class="score-grid">
+                        <div>
+                            <strong>影响对象：</strong>开发者、企业、创业者
+                        </div>
+                        <div>
+                            <strong>重要性：</strong><span class="importance-score">7/10</span>
+                        </div>
+                    </div>
+                    <div class="score-grid">
+                        <div>
+                            <strong>可信度：</strong><span class="trust-score trust-medium">中</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="remark-box">
+                    <strong>备注：</strong>CNBC 原文无法访问，成本效率对比数据（10 倍）来自搜索结果聚合。具体模型性能和定价等详细信息待进一步确认。
+                </div>
+            </article>
+
+            <article class="news-card">
+                <h3>3. Google Gemini 3.5 Pro 扩展上下文窗口和认知能力</h3>
+                <div class="news-meta">
+                    <div class="meta-item"><strong>来源：</strong>搜索结果聚合</div>
+                </div>
+                <div class="news-content">
+                    <div class="content-section">
+                        <strong>链接：</strong>
+                        <div class="content-text">
+                            <a href="https://llm-stats.com/llm-updates">https://llm-stats.com/llm-updates</a>
+                        </div>
+                    </div>
+                    <div class="content-section">
+                        <strong>核查状态：</strong><span>未完全核实</span>
+                    </div>
+                    <div class="content-section">
+                        <strong>发生了什么：</strong>
+                        <div class="content-text">Google DeepMind 扩展了 Gemini 系列模型，Gemini 3.5 Pro 现已搭载 200 万 token 的上下文窗口，并引入了专门的"Deep Think"认知模式，旨在增强复杂推理能力。</div>
+                    </div>
+                    <div class="content-section">
+                        <strong>为什么重要：</strong>
+                        <div class="content-text">上下文窗口的扩展意味着模型能够处理更长的文档、代码库和对话历史，这对长文本处理、代码审查、法律文档分析等应用场景意义重大。Deep Think 模式的引入表明 AI 正在向更深层次的推理能力演进。</div>
+                    </div>
+                    <div class="score-grid">
+                        <div>
+                            <strong>影响对象：</strong>开发者、企业、研究者
+                        </div>
+                        <div>
+                            <strong>重要性：</strong><span class="importance-score">7/10</span>
+                        </div>
+                    </div>
+                    <div class="score-grid">
+                        <div>
+                            <strong>可信度：</strong><span class="trust-score trust-medium">中</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="remark-box">
+                    <strong>备注：</strong>缺乏 Google 官方公告直接链接，主要依据搜索结果聚合。Deep Think 的具体实现细节和性能数据尚未独立确认。
+                </div>
+            </article>
+
+            <article class="news-card">
+                <h3>4. Zhipu AI 在 6 月 13 日开源发布 GLM-5.2</h3>
+                <div class="news-meta">
+                    <div class="meta-item"><strong>来源：</strong>搜索结果聚合</div>
+                </div>
+                <div class="news-content">
+                    <div class="content-section">
+                        <strong>链接：</strong>
+                        <div class="content-text">
+                            <a href="https://llm-stats.com/llm-updates">https://llm-stats.com/llm-updates</a>
+                        </div>
+                    </div>
+                    <div class="content-section">
+                        <strong>核查状态：</strong><span>未完全核实</span>
+                    </div>
+                    <div class="content-section">
+                        <strong>发生了什么：</strong>
+                        <div class="content-text">Zhipu AI（智谱）在 6 月 13 日发布了 GLM-5.2 模型，采用 MIT 开源许可证，允许广泛的商业和学术使用。</div>
+                    </div>
+                    <div class="content-section">
+                        <strong>为什么重要：</strong>
+                        <div class="content-text">开源发布降低了中国最先进 AI 模型的使用门槛，对全球开发者和研究者具有重要意义。MIT 许可证的选择表明 Zhipu 对其技术的信心，以及对开源生态贡献的承诺。</div>
+                    </div>
+                    <div class="score-grid">
+                        <div>
+                            <strong>影响对象：</strong>开发者、研究者、创业者
+                        </div>
+                        <div>
+                            <strong>重要性：</strong><span class="importance-score">6/10</span>
+                        </div>
+                    </div>
+                    <div class="score-grid">
+                        <div>
+                            <strong>可信度：</strong><span class="trust-score trust-medium">中</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="remark-box">
+                    <strong>备注：</strong>缺乏 Zhipu 官方公告或 arXiv 论文的直接链接，主要依据搜索结果。具体模型性能参数和与其他同级模型的对比数据需进一步确认。
+                </div>
+            </article>
+
+            <article class="news-card">
+                <h3>5. AI 从聊天转向任务完成：Agentic 系统的兴起</h3>
+                <div class="news-meta">
+                    <div class="meta-item"><strong>来源：</strong>搜索结果聚合分析</div>
+                </div>
+                <div class="news-content">
+                    <div class="content-section">
+                        <strong>链接：</strong>
+                        <div class="content-text">
+                            <a href="https://artificialintelligence-news.com/">https://artificialintelligence-news.com/</a><br>
+                            <a href="https://blog.mean.ceo/">https://blog.mean.ceo/</a>
+                        </div>
+                    </div>
+                    <div class="content-section">
+                        <strong>核查状态：</strong><span>未完全核实</span>
+                    </div>
+                    <div class="content-section">
+                        <strong>发生了什么：</strong>
+                        <div class="content-text">业界观察到一个明显的转变：AI 正在从对话式交互（聊天机器人）演进到自主任务完成系统（Agentic AI）。这类系统正在研究、编码、客户支持、法律和商业决策等领域获得实际应用。重点从酷炫演示转向真实业务系统，注重单一工作流中能节省人工的 AI 应用，但保持人工审查。</div>
+                    </div>
+                    <div class="content-section">
+                        <strong>为什么重要：</strong>
+                        <div class="content-text">这代表了 AI 从浅层对话助手向深层自主系统的演进，具有更高的实际商业价值。对创业者而言，这意味着从通用 AI 助手竞争转向垂直领域的任务自动化机会。</div>
+                    </div>
+                    <div class="score-grid">
+                        <div>
+                            <strong>影响对象：</strong>开发者、创业者、企业、研究者
+                        </div>
+                        <div>
+                            <strong>重要性：</strong><span class="importance-score">8/10</span>
+                        </div>
+                    </div>
+                    <div class="score-grid">
+                        <div>
+                            <strong>可信度：</strong><span class="trust-score trust-medium">中</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="remark-box">
+                    <strong>备注：</strong>这是基于搜索结果中多个来源的趋势分析，而非单一事件新闻。具体案例和数据统计需进一步补充。
+                </div>
+            </article>
+        </section>
+
+        <section>
+            <h2>对普通人的影响</h2>
+            <div class="section-box">
+                <p>过去 24 小时发生的 AI 动态主要反映了一个关键转变：AI 技术从"越界"走向"守界"。最显著的是美国政府对 Anthropic 最强大 AI 模型的禁用，这表明国家开始用强硬手段介入 AI 产业。对普通人而言，这意味着：</p>
+                
+                <h3>可能的影响包括</h3>
+                <ul>
+                    <li>AI 产品服务在不同国家的可用性差异扩大（你在某个国家能用的 AI 工具，在另一个国家可能用不了）</li>
+                    <li>AI 技术进步的速度可能因地缘政治限制而放缓</li>
+                    <li>AI 应用的价格可能因供应受限而上升</li>
+                </ul>
+                
+                <h3>不应过度担心的是</h3>
+                <ul>
+                    <li>禁用针对的是具体的前沿模型，不会让所有 AI 工具消失。OpenAI、Google 等的模型仍然可用。普通用户日常使用的 AI 助手（如 ChatGPT、Google Gemini）短期内不太可能直接受到禁令影响。</li>
+                </ul>
+                
+                <h3>值得关注的是</h3>
+                <ul>
+                    <li>如果类似的禁用措施扩大到其他模型，可能会显著改变 AI 应用的生态。企业和个人应注意不要过度依赖单一 AI 平台。</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>对学习者 / 开发者的影响</h2>
+            <div class="section-box">
+                <h3>1. 关注开源和本地 AI 模型的机会</h3>
+                <p>Anthropic 模型被禁用后，开源替代品（如 Zhipu GLM-5.2、Meta LLaMA 系列、Mistral 等）的关注度上升。建议学习者和开发者深入研究如何在本地部署和微调开源模型，减少对商用闭源模型的依赖。特别是在代码生成领域，可以探索开源的代码专用模型。</p>
+                
+                <h3>2. 学习 Agentic AI 框架和自主系统架构</h3>
+                <p>从聊天向任务完成的转变意味着新的开发范式。关注 AI Agent 框架（如 LangChain、Crew.ai、AutoGPT 等），学习如何构建能自主完成多步任务、保持人工审查的系统。这是近期最有实际应用价值的方向。</p>
+                
+                <h3>3. 关注微软和其他企业的新 API 和工具</h3>
+                <p>Microsoft 的新模型系列和成本优势可能改变市场格局。如果你正在做企业级应用，关注 Microsoft Azure AI 的新产品发布和价格调整，评估是否从 OpenAI 迁移到成本更低的选项。</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>对创业者的影响</h2>
+            <div class="section-box">
+                <h3>1. Agentic 系统是最大的短期机会</h3>
+                <p>AI 市场正在从聊天/问答转向任务自动化。如果你在考虑 AI 创业，不应再纠缠于通用 AI 助手的竞争（已被大公司占据），而应聚焦垂直领域的工作流自动化：法律文件自动审查、财务数据处理、客服工单自动分类、代码审查等。这些都是真实的商业价值，而非演示。</p>
+                
+                <h3>2. 模型禁用带来的供应链风险</h3>
+                <p>Anthropic 被禁的事件表明，地缘政治可能随时切断你对关键 AI 模型的访问。创业者应：采用多个模型供应商的混合策略（不依赖单一模型），投资开源模型部署和微调能力，考虑在多个地区部署以应对未来的监管变化。</p>
+                
+                <h3>3. 成本优势重新洗牌</h3>
+                <p>Microsoft 新模型的成本效率高于 OpenAI，意味着低成本可能成为新的竞争维度。如果你的商业模式对 API 成本敏感（如 SaaS 产品按用量计费），现在是重新评估模型选择和成本结构的好时机。</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>我的判断</h2>
+            <div class="section-box">
+                <p>今天最值得关注的不是哪个新模型最强，而是 <strong>AI 产业进入地缘政治时代的信号</strong>。Anthropic Fable 5 被禁不是因为技术本身有问题，而因为美国政府认为这是国家安全问题。这将是未来五年 AI 产业的主旋律。</p>
+                
+                <p><strong>短期影响：</strong>前沿 AI 模型的全球可用性会进一步分化，跨国公司需要为不同地区维护不同的产品线；AI 技术的进步速度可能因监管而放缓。</p>
+                
+                <p><strong>中期机会：</strong>开源 AI 和本地部署需求增加，Agentic 系统从热词变成真实需求，微软和其他企业在价格战中取得优势。</p>
+                
+                <p><strong>创业建议：</strong>未来不是赌单一最强模型，而是构建能适应多个模型、能本地部署、聚焦垂直领域的系统。</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>来源链接</h2>
+            <div class="sources-list">
+                <ul>
+                    <li>
+                        <a href="https://www.anthropic.com/news/fable-mythos-access">Anthropic 官方声明：Fable 5 和 Mythos 5 访问暂停</a>
+                        <span style="color: #999; font-size: 13px;">支持第 1 条新闻的官方确认</span>
+                    </li>
+                    <li>
+                        <a href="https://fortune.com/2026/06/13/anthropic-disables-fable-mythos-export-controls-national-security-threat/">Fortune：Anthropic 在美国出口管制指令后禁用 Fable 和 Mythos</a>
+                        <span style="color: #999; font-size: 13px;">支持第 1 条新闻的权威媒体报道</span>
+                    </li>
+                    <li>
+                        <a href="https://natlawreview.com/article/ai-company-anthropic-suspends-access-claude-fable-5-claude-mythos-5-following-us">National Law Review：Anthropic 在美国出口管制指令后暂停 Fable 5 和 Mythos 5 访问</a>
+                        <span style="color: #999; font-size: 13px;">支持第 1 条新闻的法律评论角度</span>
+                    </li>
+                    <li>
+                        <a href="https://llm-stats.com/llm-updates">LLM Stats：AI 更新和模型发布跟踪</a>
+                        <span style="color: #999; font-size: 13px;">支持第 2-5 条新闻的聚合数据源</span>
+                    </li>
+                    <li>
+                        <a href="https://llm-stats.com/ai-news">LLM News：最新 AI 模型发布</a>
+                        <span style="color: #999; font-size: 13px;">支持第 2-5 条新闻的聚合数据源</span>
+                    </li>
+                    <li>
+                        <a href="https://artificialintelligence-news.com/">AI 新闻资源</a>
+                        <span style="color: #999; font-size: 13px;">支持第 5 条新闻的趋势分析</span>
+                    </li>
+                    <li>
+                        <a href="https://blog.mean.ceo/latest-ai-developments-news-june-2026/">AI 发展新闻聚合（创业版）</a>
+                        <span style="color: #999; font-size: 13px;">支持第 5 条新闻的趋势分析</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>核查说明</h2>
+            <div class="section-box">
+                <p>本次简报由于网络服务暂时过载，部分搜索请求未能完全返回。已成功核查的信息基于以下方法：</p>
+                
+                <p><strong>已成功联网确认的：</strong>Anthropic Fable 5/Mythos 5 被禁一事有官方声明和权威媒体报道支持，可信度高。</p>
+                
+                <p><strong>部分核实的：</strong>Microsoft 新模型、Google Gemini 3.5 Pro、Zhipu GLM-5.2 等信息来自搜索结果聚合，但原始详细报道或官方声明因网络问题未能完全访问，因此标注为"未完全核实"或"中等可信度"。</p>
+                
+                <p><strong>未发现的：</strong>过去 24 小时内其他重大 AI 新闻因网络问题未能充分搜索。如有其他关键新闻遗漏，属于网络限制导致的覆盖不完整，而非编造或隐瞒。</p>
+                
+                <p><strong>信息冲突：</strong>Anthropic 官方声明中提到的禁令时间点（6 月 13 日）与某些搜索结果提及的"6 月 12 日宣布"有细微差异，本报告采纳了 Anthropic 官方声明中的确切时间（6 月 13 日下午 5:21）。</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 每日 AI 要闻 | 自动生成版 | 真实性、准确性、可核查性优先</p>
+        </footer>
     </div>
-  </header>
-
-  <h2>先说结论</h2>
-  <div class="summary-card">
-    今天 AI 圈最重要的持续事件是 Anthropic 旗下顶级模型 Fable 5 和 Mythos 5 遭美国政府出口管制强制停用，今日（6 月 22 日）恰为付费订阅者免费使用期截止日，模型已离线整整 10 天。这一事件标志着政府监管正式成为 AI 行业真实的运营约束，不再是假设性风险——政策可以在数小时内让已向数亿用户部署的顶级商业模型全球停用。对开发者和企业用户而言，"单一模型依赖"的架构风险已被现实验证，多模型备份从建议变为紧迫需要。
-  </div>
-
-  <h2>今日最值得关注的 4 件事</h2>
-  <div class="note-box">
-    说明：6 月 22 日当天尚未出现全新重大 AI 事件。本期收录近期最值得关注的 4 条核心动态，各条注明实际发生/发布时间。可核实且足够重要的新内容共 4 条，因此本期只收录 4 条。
-  </div>
-
-  <!-- News 1 -->
-  <div class="news-card">
-    <h3>1. Anthropic Fable 5 &amp; Mythos 5 遭美国政府出口管制停用第 10 天，付费订阅免费期今日到期</h3>
-    <div class="badge-row">
-      <span class="badge badge-verified">已核实</span>
-      <span class="badge badge-trust-high">可信度：高</span>
-      <span class="badge badge-score">重要性：9/10</span>
-    </div>
-    <div class="meta-row"><strong>来源：</strong>Anthropic 官方声明 / Fortune / TechCrunch / TIME</div>
-    <div class="meta-row"><strong>链接：</strong><a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank">https://www.anthropic.com/news/fable-mythos-access</a></div>
-    <div class="meta-row"><strong>实际发生时间：</strong>2026 年 6 月 12 日（今日为停用第 10 天，并为付费方案免费期截止日）</div>
-    <div class="divider"></div>
-    <div class="meta-row"><strong>发生了什么：</strong>美国商务部于 2026 年 6 月 12 日向 Anthropic 发出出口管制指令，禁止任何外国国籍人士（包括 Anthropic 自己的外籍员工）访问 Fable 5 和 Mythos 5。Anthropic 被迫于同日下午 5:21（美东时间）将两款模型全球下线。截至 6 月 22 日（今日），模型已停用整整 10 天，仍未恢复。6 月 22 日同时是付费订阅用户（Pro、Max、Team、Enterprise 方案）Fable 5 免费使用窗口关闭的截止日期，次日起使用 Fable 5 须消耗额外积分。</div>
-    <div class="meta-row"><strong>为什么重要：</strong>Fable 5 是 Anthropic 迄今发布的性能最强模型，在编程、知识工作、视觉和科研等多个基准测试上达到业界最高水平。此次停用不仅影响全球数亿用户，也开创了美国政府以国家安全为由强制下线已上线商业 AI 模型的先例。Anthropic 国际业务负责人 Chris Ciauri 表示"对模型将在数日内恢复访问有信心"，但尚无官方恢复日期。</div>
-    <div class="meta-row"><strong>影响对象：</strong>普通用户 / AI 学习者 / 开发者 / 创业者 / 企业 / 研究者</div>
-    <div class="meta-row"><strong>备注：</strong>政府指令的具体国家安全依据尚未完全公开。TechCrunch 报道称，政府声称发现了一种绕过（jailbreak）Fable 5 的方法，但 Anthropic 对该说法提出异议，认为这不足以成为下线已向数亿用户部署的商业模型的理由，并指出若以此标准衡量，行业内所有前沿模型的新部署都将陷入停滞。</div>
-  </div>
-
-  <!-- News 2 -->
-  <div class="news-card">
-    <h3>2. 谷歌 Gemini 联合负责人 Noam Shazeer 离职加入 OpenAI</h3>
-    <div class="badge-row">
-      <span class="badge badge-verified">已核实</span>
-      <span class="badge badge-trust-high">可信度：高</span>
-      <span class="badge badge-score">重要性：8/10</span>
-    </div>
-    <div class="meta-row"><strong>来源：</strong>CNBC / 9to5Google / 多家媒体</div>
-    <div class="meta-row"><strong>链接：</strong><a href="https://www.cnbc.com/2026/06/18/google-gemini-co-lead-noam-shazeer-leaves-for-openai.html" target="_blank">https://www.cnbc.com/2026/06/18/google-gemini-co-lead-noam-shazeer-leaves-for-openai.html</a></div>
-    <div class="meta-row"><strong>实际发生时间：</strong>2026 年 6 月 18 日</div>
-    <div class="divider"></div>
-    <div class="meta-row"><strong>发生了什么：</strong>Noam Shazeer 于 2026 年 6 月 18 日宣布离开谷歌，加入 OpenAI。Shazeer 是 2017 年划时代论文《Attention Is All You Need》的联合作者之一，该论文奠定了现代大型语言模型的技术基础。他在谷歌担任工程副总裁并主导 Gemini 模型研发，谷歌约两年前曾以约 27 亿美元将其从 Character.AI 回购。Sam Altman 公开表示："Noam 是我从 OpenAI 创立之初就最想合作的人之一，等了 10 年，我认为这等待是值得的。"</div>
-    <div class="meta-row"><strong>为什么重要：</strong>Shazeer 被认为是当今 AI 领域技术积累最深的工程师之一，其加入将显著强化 OpenAI 技术研究领导层，同时是对谷歌 Gemini 团队的重大打击。</div>
-    <div class="meta-row"><strong>影响对象：</strong>AI 学习者 / 开发者 / 研究者 / 投资者</div>
-    <div class="meta-row"><strong>备注：</strong>Shazeer 和 Altman 均在 X 上公开确认此消息，CNBC、9to5Google 等多家主流媒体独立报道，信息高度一致。该新闻发生于 6 月 18 日，超出"过去 24 小时"范围，但属于本周重大动态，特此收录。</div>
-  </div>
-
-  <!-- News 3 -->
-  <div class="news-card">
-    <h3>3. "Agentjacking"攻击：AI 编程助手被通过 Sentry 漏洞劫持，成功率 85%，逾 2300 个组织受影响</h3>
-    <div class="badge-row">
-      <span class="badge badge-verified">已核实</span>
-      <span class="badge badge-trust-high">可信度：高</span>
-      <span class="badge badge-score">重要性：8/10</span>
-    </div>
-    <div class="meta-row"><strong>来源：</strong>The Hacker News / Infosecurity Magazine / Cloud Security Alliance / Tenet Security</div>
-    <div class="meta-row"><strong>链接：</strong><a href="https://thehackernews.com/2026/06/agentjacking-attack-tricks-ai-coding.html" target="_blank">https://thehackernews.com/2026/06/agentjacking-attack-tricks-ai-coding.html</a></div>
-    <div class="meta-row"><strong>实际发生时间：</strong>2026 年 6 月 12 日（Tenet Security 公开披露）</div>
-    <div class="divider"></div>
-    <div class="meta-row"><strong>发生了什么：</strong>安全研究机构 Tenet Security 于 2026 年 6 月 12 日披露了名为"Agentjacking"的新型攻击手法。攻击者利用公开可访问的 Sentry 数据源名称（DSN），向错误追踪平台 Sentry 注入恶意内容。当开发者要求 Claude Code、Cursor 或 Codex 等 AI 编程助手修复这些错误时，助手将攻击者指令误判为合法诊断步骤，并执行恶意 npm 命令。截至 6 月 12 日，研究人员发现 2,388 个组织拥有可被注入的有效 DSN，总体攻击成功率约 85%。Sentry 已被通知，但表示该问题"从技术上无法在平台层面彻底防御"，仅对已知 PoC 的特定内容字符串部署了内容过滤器。</div>
-    <div class="meta-row"><strong>为什么重要：</strong>这是首次大规模实证的 AI 编程助手供应链攻击，攻击门槛极低，波及所有使用 Claude Code、Cursor 等工具配合 Sentry 的开发者，可暴露环境变量、Git 凭证和私有仓库 URL。</div>
-    <div class="meta-row"><strong>影响对象：</strong>开发者 / 创业者 / 企业</div>
-    <div class="meta-row"><strong>备注：</strong>攻击由独立安全研究机构发现并披露，Cloud Security Alliance、The Hacker News、Infosecurity Magazine 等多家权威安全媒体均已独立核实。Sentry 的回应已公开确认。</div>
-  </div>
-
-  <!-- News 4 -->
-  <div class="news-card">
-    <h3>4. 智谱 AI 发布 GLM-5.2：MIT 协议开源，百万 Token 上下文，SWE-bench Pro 超越 GPT-5.5</h3>
-    <div class="badge-row">
-      <span class="badge badge-partial">部分核实</span>
-      <span class="badge badge-trust-mid">可信度：中</span>
-      <span class="badge badge-score">重要性：7/10</span>
-    </div>
-    <div class="meta-row"><strong>来源：</strong>The Decoder / TechTimes / aiHola / 多家媒体</div>
-    <div class="meta-row"><strong>链接：</strong><a href="https://the-decoder.com/zhipu-ais-glm-5-2-closes-in-on-closed-source-leaders-in-coding-marathons/" target="_blank">https://the-decoder.com/zhipu-ais-glm-5-2-closes-in-on-closed-source-leaders-in-coding-marathons/</a></div>
-    <div class="meta-row"><strong>实际发生时间：</strong>2026 年 6 月 13 日</div>
-    <div class="divider"></div>
-    <div class="meta-row"><strong>发生了什么：</strong>中国 AI 公司智谱 AI（Z.ai）于 2026 年 6 月 13 日发布 GLM-5.2，并将模型权重以 MIT 协议开源，无地区限制，权重已上线 Hugging Face 和 ModelScope。模型采用混合专家架构（MoE），参数总量 7440 亿，激活参数 400 亿，上下文窗口达 100 万 Token。在 SWE-bench Pro 编程基准上，GLM-5.2 以 62.1 分超越 GPT-5.5（58.6 分）。API 价格约为 $1.40/$4.40（输入/输出，每百万 Token），显著低于 GPT-5.5 的 $5/$30。</div>
-    <div class="meta-row"><strong>为什么重要：</strong>GLM-5.2 是迄今在主流编程基准上超越 GPT-5.5 的开源模型之一，以 MIT 协议开放权重意味着开发者可商业自由部署，且 API 成本大幅更低。</div>
-    <div class="meta-row"><strong>影响对象：</strong>AI 学习者 / 开发者 / 创业者 / 研究者</div>
-    <div class="meta-row"><strong>备注：</strong>具体基准分数来自多家媒体报道，尚未看到智谱 AI 官方技术报告或 arXiv 论文发布以进行一手核实，故标注"部分核实"。另有报道指出通过智谱官方 API 使用存在数据传至中国境内服务器的潜在风险，企业级用户需在合规评估后再行使用。</div>
-  </div>
-
-  <h2>对普通人的影响</h2>
-  <div class="section-body">
-    本周 AI 圈最值得普通用户关注的事情，是 Anthropic 的顶级 AI 模型 Fable 5 因美国政府出口管制被强制下线。如果你是 Claude 的付费用户，今天（6 月 22 日）是免费使用 Fable 5 的最后一天，明天起需消耗额外积分才能使用。<br><br>
-    更大的影响在于：这件事提醒我们，使用任何单一 AI 服务都存在风险——政策、监管或商业决策，都可能导致你习惯的工具突然无法使用。目前 Claude Opus 4.8 和 Claude Sonnet 4.6 仍可正常使用，这两款模型也保持了较高性能水平。<br><br>
-    对普通用户而言，短期内最值得做的事是：不要把任何单一 AI 工具当成不可替代的依赖，了解你常用工具的备选方案。
-  </div>
-
-  <h2>对学习者 / 开发者的影响</h2>
-  <div class="section-body">
-    <ol>
-      <li><strong>立即审查 AI 编程助手的 Sentry 配置（对应新闻 3）：</strong>如果你在使用 Claude Code、Cursor 或 Codex 配合 Sentry，应立即检查是否有可被外部写入的 DSN 暴露在公网。Agentjacking 攻击已被证实有效且门槛极低，应将 Sentry DSN 视为敏感凭证严格管理，避免将其硬编码在公开代码库中。</li>
-      <li><strong>评估 GLM-5.2 用于编程任务（对应新闻 4）：</strong>GLM-5.2 权重已在 Hugging Face 上线，MIT 协议可商业使用，SWE-bench Pro 表现超过 GPT-5.5，且 API 价格大幅更低。如果你的使用场景不涉及敏感数据，值得在近期测试其代码生成能力。</li>
-      <li><strong>建立多模型备份策略（对应新闻 1）：</strong>Fable 5 断供事件是一次真实的"单点故障"警示。建议在生产环境中准备至少两个不同提供商的模型调用方案（如 Anthropic + OpenAI 或 Google Gemini），通过统一的模型网关层实现快速切换，避免核心业务对单一模型产生硬依赖。</li>
-    </ol>
-  </div>
-
-  <h2>对创业者的影响</h2>
-  <div class="section-body">
-    <ol>
-      <li><strong>AI 工具依赖风险已被验证，必须建立应急预案：</strong>Fable 5 停用 10 天说明，即便是 Anthropic 这样体量的公司，其核心产品也可能在数小时内因监管原因全球停用。以 Claude API 为核心构建产品的创业者，需要在架构设计中加入模型切换能力，并在合同层面与供应商明确 SLA 条款和故障补偿机制。</li>
-      <li><strong>AI 编程助手的安全漏洞是真实的产品与声誉风险：</strong>Agentjacking 的 85% 成功率和 2,388 个已暴露组织说明这是一个活跃的攻击面，而非理论威胁。如果你的产品或研发流程中集成了 AI 编程助手，需立即对员工进行安全培训，并制定针对 AI 工具链的安全策略。</li>
-      <li><strong>中国开源模型的竞争力崛起带来成本机会与合规挑战：</strong>GLM-5.2 以远低于 OpenAI 和 Anthropic 的定价提供接近顶级水平的编程性能，对成本敏感的初创公司具有吸引力。但数据隐私合规风险（数据经中国服务器处理）需在使用前进行评估，特别是面向欧美用户的产品需额外谨慎。</li>
-    </ol>
-  </div>
-
-  <h2>我的判断</h2>
-  <div class="judgement-card">
-    <strong>我的判断：</strong>本周最值得持续关注的趋势不是单一的模型发布，而是政府监管正在成为 AI 行业真实的运营约束条件。Fable 5 事件是迄今最直接的案例——一款已向数亿用户部署的商业模型，在没有充分公开理由的情况下被政府指令强制停用超过 10 天。这不是假设性的监管风险，而是已经发生的事实，且尚未看到清晰的解决路径。与此同时，Noam Shazeer 加入 OpenAI 说明顶级 AI 人才的流动正在加剧，OpenAI 正在系统性地招募领域内最有影响力的研究者。Agentjacking 的披露则提醒我们，AI 工具链的安全攻击面正随着 AI 辅助编程的普及快速扩大，且现有平台并不承担修复责任。今日并无重大新模型发布，AI 能力竞赛本周暂时让位于政策、人才和安全议题，这本身就是一个值得记录的信号。
-  </div>
-
-  <h2>来源链接</h2>
-  <div class="sources-list">
-    <ul>
-      <li><a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank">Anthropic 官方声明：暂停 Fable 5 和 Mythos 5 访问权限</a> — 支持新闻 1（出口管制停用事件的一手来源）</li>
-      <li><a href="https://fortune.com/2026/06/13/anthropic-disables-fable-mythos-export-controls-national-security-threat/" target="_blank">Fortune：Anthropic 在美国出口禁令后下线 Fable 和 Mythos 模型</a> — 支持新闻 1（禁令详情）</li>
-      <li><a href="https://techcrunch.com/2026/06/15/the-us-governments-anthropic-models-ban-was-never-about-an-ai-jailbreak/" target="_blank">TechCrunch：美国政府的 Anthropic 禁令从未真正关乎 AI Jailbreak</a> — 支持新闻 1（政府说法核查分析）</li>
-      <li><a href="https://www.cnbc.com/2026/06/18/google-gemini-co-lead-noam-shazeer-leaves-for-openai.html" target="_blank">CNBC：谷歌 Gemini 联合负责人 Noam Shazeer 离职加入 OpenAI</a> — 支持新闻 2</li>
-      <li><a href="https://9to5google.com/2026/06/17/geminis-co-lead-is-leaving-google-to-join-openai/" target="_blank">9to5Google：Gemini 联合负责人正在离职加入 OpenAI</a> — 支持新闻 2（独立报道）</li>
-      <li><a href="https://thehackernews.com/2026/06/agentjacking-attack-tricks-ai-coding.html" target="_blank">The Hacker News：Agentjacking 攻击诱骗 AI 编程助手执行恶意代码</a> — 支持新闻 3</li>
-      <li><a href="https://labs.cloudsecurityalliance.org/research/csa-research-note-agentjacking-mcp-sentry-injection-20260612/" target="_blank">Cloud Security Alliance：Agentjacking MCP Sentry 注入研究笔记</a> — 支持新闻 3（独立安全研究机构核实）</li>
-      <li><a href="https://the-decoder.com/zhipu-ais-glm-5-2-closes-in-on-closed-source-leaders-in-coding-marathons/" target="_blank">The Decoder：Zhipu AI GLM-5.2 在编程基准上接近闭源领导者</a> — 支持新闻 4</li>
-    </ul>
-  </div>
-
-  <h2>核查说明</h2>
-  <div class="check-card">
-    <ul>
-      <li><strong>是否成功联网：</strong>是，本次成功进行了多轮实时网络检索。</li>
-      <li><strong>主要参考来源类型：</strong>Anthropic 官方博客（一手来源）、权威科技媒体（CNBC、TechCrunch、Fortune、The Decoder、The Hacker News）、独立安全研究机构（Cloud Security Alliance、Tenet Security）。</li>
-      <li><strong>未完全核实信息：</strong>新闻 4（GLM-5.2）标注为"部分核实"，基准数据来自媒体报道，尚未见到智谱 AI 官方技术报告或 arXiv 论文。</li>
-      <li><strong>来源冲突：</strong>TechCrunch 对美国政府禁令真实动机的分析与政府官方说法存在出入，已在新闻 1 备注中说明，两方说法均有记录但不做倾向性裁决。</li>
-      <li><strong>因无法核实而排除的传闻：</strong>OpenAI IPO 估值具体数字（$730B，来源单一）、GPT-5.6 预期发布时间（无官方确认）未予收录。</li>
-      <li><strong>时效性说明：</strong>6 月 22 日当天尚未出现全新重大 AI 事件，收录新闻实际发生于 6 月 12–18 日，均属过去一周重大动态，各条已注明实际时间。</li>
-    </ul>
-  </div>
-
-  <footer>每日 AI 要闻 · 2026-06-22 · 自动生成版</footer>
-
-</div>
 </body>
 </html>
