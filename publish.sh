@@ -49,68 +49,137 @@ cat > index.html <<HTML
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>每日 AI 要闻</title>
+  <meta name="description" content="每天筛选真正值得关注的 AI 变化，用普通人也能看懂的方式解释：发生了什么、为什么重要、和你有什么关系。">
+  <meta property="og:title" content="每日 AI 要闻">
+  <meta property="og:description" content="每天筛选真正值得关注的 AI 变化，用普通人也能看懂的方式解释。">
+  <meta property="og:type" content="website">
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
-      padding: 24px 16px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f6f7f9;
-      color: #111;
-      line-height: 1.75;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+      background: #f2f2f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
     }
-    main {
-      max-width: 720px;
-      margin: 0 auto;
+    .card {
+      max-width: 400px;
+      width: 100%;
       background: #fff;
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: 0 8px 30px rgba(0,0,0,.06);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04);
     }
-    h1 {
-      font-size: 30px;
-      margin: 0 0 12px;
-      letter-spacing: -0.02em;
+    .header {
+      background: #111;
+      color: #fff;
+      padding: 28px 28px 26px;
     }
-    p {
-      font-size: 16px;
-      margin: 12px 0;
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,.12);
+      color: rgba(255,255,255,.8);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
     }
-    a {
-      color: #0b57d0;
-      word-break: break-all;
+    .title {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
     }
-    .button {
+    .subtitle {
+      margin-top: 8px;
+      font-size: 14px;
+      color: rgba(255,255,255,.55);
+      line-height: 1.5;
+    }
+    .body {
+      padding: 22px 28px 28px;
+    }
+    .list {
+      list-style: none;
+      margin-bottom: 22px;
+    }
+    .list li {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.6;
+      padding: 8px 0;
+      border-bottom: 1px solid #f5f5f5;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .list li:last-child { border-bottom: none; }
+    .list li::before {
+      content: "";
       display: block;
-      margin: 18px 0;
-      padding: 14px 16px;
-      border-radius: 12px;
+      width: 5px;
+      height: 5px;
+      background: #ccc;
+      border-radius: 50%;
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+    .btn {
+      display: block;
+      padding: 15px;
       background: #111;
       color: #fff;
       text-decoration: none;
       text-align: center;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 15px;
+      border-radius: 14px;
+      margin-bottom: 16px;
+      -webkit-tap-highlight-color: transparent;
     }
-    .muted {
-      color: #666;
-      font-size: 14px;
-      margin-top: 20px;
+    .footer {
+      text-align: center;
+      color: #bbb;
+      font-size: 12px;
+      line-height: 1.8;
     }
+    .footer strong { color: #777; }
   </style>
 </head>
 <body>
-  <main>
-    <h1>每日 AI 要闻</h1>
-
-    <p>每天筛选真正值得关注的 AI 变化，用普通人也能看懂的方式解释：发生了什么、为什么重要、和你有什么关系。</p>
-
-    <p>这份简报不是简单搬运新闻，而是帮你从 AI 行业的模型发布、产品更新、开源项目、商业动态和监管变化中，挑出最值得关注的内容。</p>
-
-    <p>内容包括：今日最重要的 AI 动态、对普通人的影响、对学习者和开发者的建议、对创业者的启发，以及我的判断。</p>
-
-    <a class="button" href="./$latest_html?t=$compact_date">阅读最新 AI 要闻</a>
-
-    <p class="muted">当前最新一期：$html_date。每日自动生成并持续更新，内容仅供学习、观察和信息参考。</p>
-  </main>
+  <div class="card">
+    <div class="header">
+      <div class="badge">Daily AI Briefing</div>
+      <div class="title">每日 AI 要闻</div>
+      <div class="subtitle">每天一份，看懂 AI 行业真正在发生什么</div>
+    </div>
+    <div class="body">
+      <ul class="list">
+        <li>筛选过去 24 小时最重要的 AI 动态</li>
+        <li>解释发生了什么、为什么重要、谁会受影响</li>
+        <li>涵盖模型发布、产品更新、开源项目与监管变化</li>
+        <li>提供对普通人、开发者、创业者的具体分析</li>
+      </ul>
+      <a class="btn" href="./$latest_html?t=$compact_date">阅读最新一期</a>
+      <div class="footer">
+        最新一期：<strong id="date-label">–</strong><br>
+        每日自动生成 · 内容仅供信息参考
+      </div>
+    </div>
+  </div>
+  <script>
+    var btn = document.querySelector('.btn');
+    var m = btn.href.match(/(\d{4})-(\d{2})-(\d{2})/);
+    if (m) {
+      document.getElementById('date-label').textContent =
+        m[1] + ' 年 ' + parseInt(m[2]) + ' 月 ' + parseInt(m[3]) + ' 日';
+    }
+  </script>
 </body>
 </html>
 HTML
