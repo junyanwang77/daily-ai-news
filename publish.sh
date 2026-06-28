@@ -184,6 +184,9 @@ cat > index.html <<HTML
 </html>
 HTML
 
+echo "Syncing agents.json..."
+cp "$HOME/.claudepot/agents.json" agents.json
+
 echo "Git status before commit:"
 git status --short
 

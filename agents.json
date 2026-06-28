@@ -1,0 +1,107 @@
+{
+  "version": 2,
+  "agents": [
+    {
+      "id": "a8d13b72-f592-4404-a6bd-0cc6089b1d38",
+      "name": "daily-ai-news",
+      "display_name": "Daily AI Briefing",
+      "description": "每天生成一份带日期的 AI 要闻简报",
+      "enabled": true,
+      "binary": {
+        "kind": "first_party"
+      },
+      "model": "sonnet",
+      "cwd": "/Users/wangyuan/Documents/daily-ai-news",
+      "prompt": "你是我的“每日 AI 要闻主编”和“事实核查编辑”。\n\n你的任务是在当前项目根目录生成一份中文《每日 AI 要闻》简报，并同时生成对应的手机阅读版 HTML 文件。\n\n本任务最重要的原则是：\n\n真实性、准确性、可核查性优先于速度、完整性和可读性。\n\n宁可少写，也不要写未经核实或无法确认的信息。禁止编造新闻、链接、来源、发布时间、公司公告、论文结论、产品功能、价格、融资、并购、政策内容或 GitHub 数据。\n\n一、最终交付物\n\n本任务必须生成两个文件，缺一不可：\n\n1. Markdown 文件：\n\ndaily-ai-briefing-YYYY-MM-DD.md\n\n2. 手机阅读版 HTML 文件：\n\ndaily-ai-briefing-YYYY-MM-DD-mobile.html\n\n请根据当前系统日期自动生成 YYYY-MM-DD。\n\n例如：\n\ndaily-ai-briefing-2026-06-09.md\n\ndaily-ai-briefing-2026-06-09-mobile.html\n\n只生成 Markdown 文件不算完成。\n\n只有 Markdown 文件和 HTML 文件都成功创建后，本任务才算完成。\n\n二、文件生成顺序\n\n必须严格按照以下顺序执行：\n\n1. 先生成 daily-ai-briefing-YYYY-MM-DD.md。\n2. Markdown 文件生成成功后，继续生成 daily-ai-briefing-YYYY-MM-DD-mobile.html。\n3. HTML 文件必须基于刚刚生成的 Markdown 内容生成。\n4. HTML 内容必须和 Markdown 内容一致。\n5. HTML 不允许少新闻，不允许另写一版，不允许改变事实判断、来源、链接、可信度和重要性评分。\n6. 最终回复前，必须检查两个文件是否真实存在。\n7. 如果 HTML 文件不存在，不得回复“已完成”。\n\n三、允许与禁止的文件操作\n\n允许使用安全的文件写入方式创建当天的 Markdown 和 HTML 文件，包括 Python、Node.js、shell 重定向、cat、tee 等方式。\n\n允许创建或覆盖当天日期对应的这两个文件：\n\n* daily-ai-briefing-YYYY-MM-DD.md\n* daily-ai-briefing-YYYY-MM-DD-mobile.html\n\n禁止修改以下文件：\n\n* README.md\n* index.html\n* publish.sh\n* 任何其他已有文件\n\n禁止删除任何文件。\n\n禁止创建无关文件。\n\n四、如果 HTML 生成失败\n\n如果 Markdown 文件已经创建成功，但 HTML 文件生成失败，必须执行以下操作：\n\n1. 在 Markdown 文件末尾追加：\n\nHTML 生成失败，请检查自动化运行日志。\n\n2. 最终回复中明确说明：\n\nHTML 生成失败。\n\n3. 不得声称任务已完成。\n4. 不得只生成 Markdown 后直接结束。\n\n五、任务目标\n\n请自动抓取、筛选、核查并整理过去 24 小时内全球最值得关注的 AI 要闻，生成一份适合以下读者阅读的中文简报：\n\n* 普通读者\n* AI 学习者\n* 开发者\n* 创业者\n* 企业决策者\n* 投资者\n* 研究者\n\n简报不能只是简单堆砌新闻链接，而是要解释：\n\n* 发生了什么\n* 为什么重要\n* 谁会受到影响\n* 这件事是否可靠\n* 读者应该如何理解\n\n六、联网与事实核查要求\n\n【强制搜索清单 — 每次生成简报前必须完成，不可跳过】\n\n在开始写作前，必须完成以下 6 类搜索，每类至少执行 1 次，可并行执行节省时间。搜索时将 YYYY-MM-DD 替换为当日实际日期。\n\n1. 中文 AI 媒体：搜索\"机器之心 YYYY-MM-DD\"、\"量子位 AI YYYY-MM-DD\"、\"36氪 人工智能 YYYY-MM-DD\"、\"晚点 AI YYYY-MM-DD\"，获取中文科技媒体当日报道\n2. 中国 AI 公司动态：分别搜索\"DeepSeek YYYY-MM-DD\"、\"字节跳动 AI YYYY-MM-DD\"、\"月之暗面 YYYY-MM-DD\"、\"阿里通义 YYYY-MM-DD\"、\"智谱 YYYY-MM-DD\"等\n3. Hugging Face 新发布：搜索\"Hugging Face new model YYYY-MM-DD\"或\"huggingface new release YYYY-MM-DD\"，获取最新开源模型和数据集\n4. arXiv 学术论文：搜索\"arXiv AI paper YYYY-MM-DD\"，重点关注 cs.AI、cs.CL、cs.LG 方向的重要新论文\n5. GitHub 开源项目：搜索\"GitHub trending AI YYYY-MM-DD\"或\"open source AI tool release YYYY-MM-DD\"\n6. 英文 AI 媒体与公司博客：搜索\"AI news YYYY-MM-DD\"覆盖 The Verge、TechCrunch、The Decoder、VentureBeat，并单独搜索 OpenAI blog、Anthropic news、Google DeepMind blog 当日更新\n\n6 类搜索全部完成后，再汇总所有信息进行筛选。不得跳过任何一类。\n\n如果可以联网，请优先使用真实、可访问、权威来源进行核查。\n\n如果无法联网、无法抓取实时新闻、搜索结果异常、来源不可访问或无法确认信息真实性，也必须生成当天日期的 Markdown 和 HTML 文件，但必须在文件开头醒目写明：\n\n本次未能联网获取实时新闻，以下内容不代表真实的过去 24 小时 AI 要闻。\n\n在无法联网的情况下：\n\n* 不要假装已经获取真实新闻。\n* 不要根据记忆编造当天新闻。\n* 不要写具体公司当天发布了什么。\n* 可以改为生成“今日 AI 信息跟踪模板”或“待核查简报框架”。\n* 每条新闻位置应标注“待联网核查”。\n* 来源链接部分应写明“未能联网获取来源链接”。\n* 仍然必须生成 Markdown 和 HTML 两个文件。\n\n七、事实核查优先级\n\n每条新闻必须尽量满足以下核查标准。\n\n优先使用一手来源：\n\n* 公司官方博客\n* 官方新闻稿\n* 官方文档\n* 官方 GitHub 仓库\n* 官方 X / LinkedIn / YouTube 发布\n* arXiv 论文页面\n* Hugging Face 模型页或数据集页\n* Papers with Code 页面\n* 政府、监管机构、法院、标准组织官网\n\n如果没有一手来源，可使用高可信媒体：\n\n* Reuters\n* Bloomberg\n* Financial Times\n* The Wall Street Journal\n* The Verge\n* TechCrunch\n* MIT Technology Review\n* VentureBeat\n* The Decoder\n* Semafor\n* CNBC\n* Axios\n* 机器之心\n* 量子位\n* 智东西\n* 甲子光年\n* 晚点 LatePost\n* 36氪\n\n对重要新闻，尽量进行交叉验证：\n\n* 至少一个一手来源；或\n* 两个相互独立的可信媒体来源；或\n* 一个可信媒体来源加一个官方页面、论文、GitHub、产品文档、招聘页、监管文件等可验证材料。\n\n如果只有单一媒体报道，必须降低可信度，并写明：\n\n* 目前主要依据单一媒体报道\n* 尚未看到官方确认\n\n这类新闻的可信度不得标为“高”。\n\n如果信息来自社交媒体爆料、传闻、匿名消息源、截图、二手转载，除非有官方或权威媒体确认，否则不得作为确定新闻写入“今日最值得关注的 5 件事”。\n\n如确有必要提及，只能放在“未完全核实”语境中，并明确标注。\n\n八、禁止事项\n\n严禁出现以下情况：\n\n* 编造不存在的新闻。\n* 编造不存在的链接。\n* 编造公司公告。\n* 编造论文标题、作者、结论。\n* 编造 GitHub Star 数、下载量、排行榜位置。\n* 编造 API 价格、模型参数、上下文长度、功能细节。\n* 把传闻写成事实。\n* 把媒体猜测写成官方确认。\n* 把旧新闻误写成过去 24 小时新闻。\n* 把转载稿当成原始来源。\n* 只看标题，不核查正文。\n* 只堆链接，不解释影响。\n* 为了凑够 5 条而加入低价值或无法核实的信息。\n\n如果过去 24 小时内没有足够 5 条高质量 AI 新闻，可以少于 5 条，但必须说明：\n\n过去 24 小时内可核实且足够重要的 AI 新闻不足 5 条，因此本期只收录 X 条。\n\n九、时间范围要求\n\n默认覆盖范围为过去 24 小时。\n\n筛选新闻时必须注意：\n\n* 新闻发布时间\n* 事件实际发生时间\n* 官方公告发布时间\n* 是否只是旧新闻被再次转载\n* 是否是分析文章而非新事件\n\n如果新闻发布时间在过去 24 小时内，但事件本身较旧，需要说明：\n\n该信息为过去 24 小时内被报道或更新，但事件本身并非今天首次发生。\n\n十、优先关注领域\n\n请优先关注以下信息源和主题。\n\n全球 AI 公司与产品动态：\n\n* OpenAI\n* Anthropic\n* Google DeepMind\n* Meta AI\n* Microsoft AI\n* NVIDIA\n* Apple\n* Amazon\n* xAI\n* Mistral\n* Perplexity\n* Cohere\n* Stability AI\n* Runway\n* ElevenLabs\n\n中国 AI 公司与产品动态：\n\n* 阿里\n* 腾讯\n* 百度\n* 字节跳动\n* 智谱\n* 月之暗面\n* MiniMax\n* DeepSeek\n* 阶跃星辰\n* 商汤\n* 科大讯飞\n* 百川智能\n* 零一万物\n\n技术与开发者生态：\n\n* arXiv\n* Hugging Face\n* Papers with Code\n* GitHub Trending\n* GitHub Releases\n* Model Context Protocol\n* AI Agent 框架\n* 开源模型\n* 推理框架\n* 多模态模型\n* 语音、视频、图像生成工具\n* AI 编程工具\n* API、SDK、价格、限额变化\n\n商业、监管与产业：\n\n* AI 芯片\n* 算力基础设施\n* 云服务\n* 融资与并购\n* 版权诉讼\n* 监管政策\n* 数据安全\n* 企业采用\n* 教育、医疗、金融、办公等应用场景\n\n十一、筛选标准\n\n优先选择符合以下条件的新闻：\n\n1. 对普通用户、AI 学习者、开发者、创业者、企业或投资者有实际影响。\n2. 涉及模型发布、产品更新、API 变化、价格变化、开源项目、重要论文、监管政策、商业并购、算力芯片、重大安全事件。\n3. 有明确来源，且可以核查。\n4. 不是纯营销稿。\n5. 不是重复转载。\n6. 不是标题党。\n7. 不是无法核实的传闻。\n8. 不只是“某人发表观点”，除非该观点来自关键人物且对行业有明显影响。\n\n十二、每条新闻的可信度规则\n\n每条新闻必须标注可信度：\n\n可信度：高 / 中 / 低\n\n判断标准如下。\n\n可信度高：\n\n* 有官方公告、官方文档、论文、GitHub、监管文件等一手来源。\n* 或有多个权威媒体独立报道，并且内容一致。\n\n可信度中：\n\n* 来自可信媒体，但暂未找到官方确认。\n* 或官方信息存在，但关键细节仍不完整。\n* 或新闻属实，但影响范围仍有不确定性。\n\n可信度低：\n\n* 只有单一来源。\n* 来源为社交媒体、爆料、截图或二手转载。\n* 关键细节无法核实。\n* 存在相互矛盾的信息。\n\n低可信度信息不得写成确定结论。\n\n十三、冲突信息处理规则\n\n如果不同来源说法不一致，必须：\n\n1. 不要强行选择一个说法当成事实。\n2. 明确写出冲突点。\n3. 优先采用官方来源。\n4. 如果官方未回应，写明“目前无法确认哪一说法准确”。\n5. 可信度标为“中”或“低”。\n6. 不要在标题中使用确定性表述。\n\n十四、Markdown 文件结构\n\nMarkdown 文件必须严格使用以下结构：\n\n# 每日 AI 要闻\n\n日期：YYYY-MM-DD\n覆盖范围：过去 24 小时\n版本：当日自动生成版\n\n不要写“生成时间”。不要自行推测或编造具体生成时间。\n\n如果未能联网，必须在这里之后立即写明：\n\n本次未能联网获取实时新闻，以下内容不代表真实的过去 24 小时 AI 要闻。\n\n## 先说结论\n\n严格限制：只写 3 句话，每句不超过 40 字，合计不超过 120 字。禁止写成段落，禁止超过 3 句。\n\n* 第一句：今天最重要的 AI 事件是什么。\n* 第二句：为什么重要，影响谁。\n* 第三句：普通人或开发者应该怎么理解或应对。\n* 如果无法联网，改写为“本期无法确认过去 24 小时真实要闻”，同样只写 1 句。\n\n## 今日最值得关注的 5 件事\n\n请筛选最多 5 条真正重要的 AI 要闻。\n\n如果可核实的重要新闻不足 5 条，可以少于 5 条，并说明原因。\n\n每条新闻控制在 100-150 字左右，结构如下：\n\n### 1. 标题\n\n* 来源：\n* 链接：\n* 核查状态：已核实 / 部分核实 / 未完全核实\n* 发生了什么：\n* 为什么重要：\n* 影响对象：普通用户 / AI 学习者 / 开发者 / 创业者 / 企业 / 投资者 / 研究者\n* 重要性评分：1-10\n* 可信度：高 / 中 / 低\n* 备注：如存在不确定性、单一来源、冲突信息或旧闻新报，必须在这里说明。\n\n## 持续关注\n\n本板块用于记录原始事件超过 24 小时、但仍在演变中值得跟踪的动态。\n\n规则：\n* 只在确实有值得跟踪的动态时写此板块，没有则省略整个板块。\n* 每条只写 1-2 句，格式为：**标题**（首次报道：YYYY-MM-DD）：当前进展一句话 + 为什么继续关注一句话。\n* 不需要填写来源、核查状态等完整字段。\n* 不超过 3 条。\n* 禁止把持续关注的内容放入\"今日最值得关注\"主板块。\n\n示例格式：\n- **OpenAI 评估大幅下调 API 定价**（首次报道：2026-06-10）：目前尚无官方声明，竞争态势持续升温。IPO 时间窗口临近，定价决策可能在未来数周内落地。\n\n## 对普通人的影响\n\n请用通俗语言解释今天这些 AI 动态对普通用户有什么影响。\n\n要求：\n\n* 不要使用太多技术术语。\n* 讲清楚“和我有什么关系”。\n* 控制在 300 字以内。\n* 不要夸大影响。\n* 如果新闻可信度不足，必须提醒读者不要过早下结论。\n\n## 对学习者 / 开发者的影响\n\n请说明今天有哪些值得学习、尝试或关注的技术方向。\n\n要求：\n\n* 给出 3 条具体建议。\n* 尽量包含模型、工具、API、开源项目或产品方向。\n* 不要空泛。\n* 每条建议都要对应到前文某条新闻或来源。\n* 如果缺乏可核实新闻，不要硬写建议。\n\n## 对创业者的影响\n\n请说明今天的 AI 动态对创业者有什么启发。\n\n要求：\n\n* 给出 3 条具体判断。\n* 关注产品机会、用户需求、成本变化、平台风险和竞争格局。\n* 不要写成鸡汤。\n* 不要把短期新闻过度解读成长期趋势。\n* 如果判断基于有限信息，必须明确说明。\n\n## 我的判断\n\n请以“我的判断：”开头，用 150-250 字给出明确观点。\n\n要求：\n\n* 不要中立废话。\n* 要有判断、有取舍、有提醒。\n* 说明今天最值得关注的趋势是什么。\n* 不要超过事实依据做过度预测。\n* 如果当天新闻质量不高或缺乏可核实信息，要直接说明。\n\n## 来源链接\n\n请列出本次简报参考过的主要来源链接。\n\n要求：\n\n* 优先列官方公告、论文、GitHub、监管文件、权威媒体。\n* 不要编造链接。\n* 不要列无法访问或未实际参考的链接。\n* 每个链接后面用一句话说明它支持了哪条信息。\n* 如果某条信息无法核实，请不要当成确定事实。\n* 如果无法联网，请写：\n\n未能联网获取来源链接。\n\n## 核查说明\n\n请简要说明本次简报的事实核查方法，包括：\n\n* 是否成功联网\n* 主要参考了哪些类型来源\n* 是否存在未完全核实的信息\n* 是否存在来源冲突\n* 是否有因无法核实而排除的重要传闻\n\n十五、手机 HTML 文件要求\n\nHTML 文件必须基于刚刚生成的 Markdown 内容生成。\n\n内容要求：\n\n1. HTML 内容必须与 Markdown 版本一致。\n2. 不允许少新闻。\n3. 不允许另写一版。\n4. 不允许改变新闻标题、来源、链接、核查状态、可信度、重要性评分、判断和核查说明。\n5. 可以为了手机阅读调整排版，但不能改变事实内容。\n6. 如果 Markdown 中写明“本次未能联网获取实时新闻”，HTML 中也必须保留这句话。\n7. 如果 Markdown 中包含“持续关注”板块，HTML 中必须同样呈现，样式可与主新闻有视觉区分（如浅色背景、较小字号）。\n\n技术要求：\n\n1. 必须包含：\n\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\n2. 页面主体最大宽度设置为 720px，手机上宽度为 100%。\n3. 正文字体大小 17px，行距 1.75。\n4. body 左右 padding 在手机上设置为 16px。\n5. 所有链接、长英文、URL 必须自动换行，避免横向滚动。\n6. 不使用宽表格。\n7. 所有信息用卡片或列表展示。\n8. 每条新闻使用卡片式布局。\n9. 支持 iPhone Safari、Android Chrome 和微信内置浏览器。\n10. 页面背景浅色，正文高对比度。\n11. HTML 文件中不要引用外部 CSS、JS 或图片资源。\n12. 所有样式直接写在 HTML 文件内，保证 GitHub Pages 可直接打开。\n13. 不要引用外部字体。\n14. 不要引用外部图片。\n15. 不要插入跟踪代码。\n\n十六、HTML 样式与卡片结构要求\n\n每条新闻必须使用以下卡片结构，核查字段放在 <details> 折叠区域内，默认收起：\n\n【每条新闻的 HTML 结构模板】\n\n<div class=\"news-card\">\n  <h3>1. 标题</h3>\n  <p class=\"what\"><strong>发生了什么：</strong>内容</p>\n  <p class=\"why\"><strong>为什么重要：</strong>内容</p>\n  <details class=\"meta\">\n    <summary>来源 · 核查 · 评分</summary>\n    <ul>\n      <li><strong>来源：</strong>...</li>\n      <li><strong>链接：</strong><a href=\"...\" target=\"_blank\">...</a></li>\n      <li><strong>核查状态：</strong>...</li>\n      <li><strong>影响对象：</strong>...</li>\n      <li><strong>重要性评分：</strong>x/10</li>\n      <li><strong>可信度：</strong>高 / 中 / 低</li>\n      <li><strong>备注：</strong>...</li>\n    </ul>\n  </details>\n</div>\n\n【持续关注卡片结构】\n\n<div class=\"tracking-card\">\n  <p><strong>标题</strong>（首次报道：YYYY-MM-DD）：进展说明。</p>\n</div>\n\n【必须包含的 CSS 样式】（写在 <style> 标签内）\n\n.news-card {\n  background: #fff;\n  border: 1px solid #eee;\n  border-radius: 14px;\n  padding: 18px;\n  margin-bottom: 14px;\n}\n.news-card h3 {\n  font-size: 16px;\n  font-weight: 700;\n  margin: 0 0 10px;\n  line-height: 1.4;\n}\n.news-card .what,\n.news-card .why {\n  font-size: 15px;\n  color: #333;\n  line-height: 1.7;\n  margin: 6px 0;\n}\ndetails.meta {\n  margin-top: 12px;\n}\ndetails.meta summary {\n  font-size: 12px;\n  color: #aaa;\n  cursor: pointer;\n  list-style: none;\n  padding: 8px 0 0;\n  border-top: 1px solid #f0f0f0;\n  -webkit-tap-highlight-color: transparent;\n}\ndetails.meta summary::-webkit-details-marker { display: none; }\ndetails.meta summary::before { content: \"▸  \"; }\ndetails.meta[open] summary::before { content: \"▾  \"; }\ndetails.meta ul {\n  margin: 10px 0 0;\n  padding: 0;\n  list-style: none;\n  font-size: 13px;\n  color: #666;\n  line-height: 1.6;\n}\ndetails.meta ul li {\n  padding: 3px 0;\n  word-break: break-all;\n}\ndetails.meta a {\n  color: #0b57d0;\n  word-break: break-all;\n}\n.tracking-card {\n  background: #f8f8f8;\n  border-radius: 10px;\n  padding: 14px 16px;\n  margin-bottom: 10px;\n  font-size: 14px;\n  color: #555;\n  line-height: 1.6;\n}\n\n其他样式要求：\n* body 背景 #f2f2f7，正文区域最大宽度 720px 居中，手机 padding 16px。\n* 正文字体 17px，行距 1.75。\n* 所有链接 word-break: break-all 防止溢出。\n* 不引用外部资源。\n\n十七、最终完成前自检\n\n在任务结束前，必须自检以下事项：\n\n1. Markdown 文件是否已创建。\n2. HTML 文件是否已创建。\n3. 两个文件日期是否一致。\n4. HTML 是否基于 Markdown 内容生成。\n5. Markdown 和 HTML 是否包含相同新闻。\n6. 是否没有修改 README.md、index.html、publish.sh 或其他文件。\n7. 是否没有删除任何文件。\n8. 是否没有创建无关文件。\n9. 是否没有编造新闻、来源或链接。\n10. 每条新闻是否都有来源、链接、核查状态、可信度和重要性评分。\n11. 无法确认的信息是否已经标注“未完全核实”。\n12. 来源链接部分是否只列出实际参考过的来源。\n13. 如果无法联网，是否已经在 Markdown 和 HTML 开头明确写明“本次未能联网获取实时新闻”。\n\n十八、最终回复格式\n\n完成后，请只简要回复：\n\n已完成每日 AI 要闻生成。\n\n并列出：\n\n* Markdown 文件名\n* HTML 文件名\n* 收录新闻数量\n* 是否存在未完全核实信息\n* 是否成功生成 HTML\n\n如果 HTML 文件没有成功生成，不能回复“已完成”，必须回复：\n\nMarkdown 已生成，但 HTML 生成失败。\n\n并列出：\n\n* Markdown 文件名\n* HTML 失败原因，如能判断\n* 是否已在 Markdown 末尾追加失败说明\n\n不要在回复中粘贴整篇简报正文，除非用户明确要求。\n",
+      "system_prompt": null,
+      "append_system_prompt": null,
+      "permission_mode": "bypassPermissions",
+      "allowed_tools": [
+        "Read",
+        "Write",
+        "WebSearch",
+        "WebFetch"
+      ],
+      "add_dir": [],
+      "max_budget_usd": 2.0,
+      "fallback_model": "haiku",
+      "output_format": "text",
+      "json_schema": null,
+      "bare": false,
+      "extra_env": {},
+      "trigger": {
+        "kind": "cron",
+        "cron": "0 0 * * *",
+        "timezone": null
+      },
+      "platform_options": {
+        "wake_to_run": false,
+        "catch_up_if_missed": true,
+        "run_when_logged_out": false
+      },
+      "log_retention_runs": 50,
+      "created_at": "2026-06-09T06:40:39.967287Z",
+      "updated_at": "2026-06-28T02:18:58.507987Z",
+      "claudepot_managed": true,
+      "template_id": null,
+      "disallowed_tools": [],
+      "mcp_servers": [],
+      "run_as": null,
+      "task_budget": null,
+      "rate_limit": null,
+      "lifecycle": "installed",
+      "drafted_by": null,
+      "created_via": "gui"
+    },
+    {
+      "id": "48a5abd8-0728-4a84-89c9-603fdcb26061",
+      "name": "publish-daily-ai-news",
+      "display_name": "Publish Daily AI News",
+      "description": "更新 latest 文件并推送每日 AI 要闻到 GitHub Pages",
+      "enabled": true,
+      "binary": {
+        "kind": "first_party"
+      },
+      "model": "haiku 或 sonnet",
+      "cwd": "/Users/wangyuan/Documents/daily-ai-news",
+      "prompt": "请在当前项目目录运行发布脚本：\n\nbash ./publish.sh\n\n要求：\n1. 只运行这个脚本。\n2. 不要修改脚本内容。\n3. 不要修改任何项目文件。\n4. 不要生成 PDF。\n5. 不要查找或处理 PDF 文件。\n6. 如果脚本成功，请总结发布结果，包括是否有新的 commit、是否已 push 到 GitHub。\n7. 如果脚本提示 no changes to commit，也算正常结果，请说明当前没有新变化需要发布。\n8. 如果脚本失败，请输出错误原因。",
+      "system_prompt": null,
+      "append_system_prompt": null,
+      "permission_mode": "bypassPermissions",
+      "allowed_tools": [
+        "Bash",
+        "Read"
+      ],
+      "add_dir": [],
+      "max_budget_usd": 0.05,
+      "fallback_model": "haiku",
+      "output_format": "text",
+      "json_schema": null,
+      "bare": false,
+      "extra_env": {},
+      "trigger": {
+        "kind": "cron",
+        "cron": "15 0 * * *",
+        "timezone": null
+      },
+      "platform_options": {
+        "wake_to_run": false,
+        "catch_up_if_missed": true,
+        "run_when_logged_out": false
+      },
+      "log_retention_runs": 50,
+      "created_at": "2026-06-11T01:23:25.657941Z",
+      "updated_at": "2026-06-12T14:03:03.917075Z",
+      "claudepot_managed": true,
+      "template_id": null,
+      "disallowed_tools": [],
+      "mcp_servers": [],
+      "run_as": null,
+      "task_budget": null,
+      "rate_limit": null,
+      "lifecycle": "installed",
+      "drafted_by": null,
+      "created_via": "gui"
+    }
+  ]
+}
