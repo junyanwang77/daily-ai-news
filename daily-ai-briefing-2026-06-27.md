@@ -17,7 +17,7 @@ OpenAI 于6月26日发布 GPT-5.6 系列（Sol、Terra、Luna）限量预览，�
 ### 1. OpenAI 发布 GPT-5.6 系列：Sol、Terra、Luna 限量预览开启
 
 - **来源：** OpenAI 官方博客、Axios、VentureBeat、MacRumors
-- **链接：** https://openai.com/index/previewing-gpt-5-6-sol/
+- **链接：** [https\://openai.com/index/previewing-gpt-5-6-sol/](https://openai.com/index/previewing-gpt-5-6-sol/)
 - **核查状态：** 已核实
 - **发生了什么：** OpenAI 于2026年6月26日发布 GPT-5.6 系列三款模型——Sol（旗舰）、Terra（均衡）、Luna（低成本），API 定价分别为 Sol $5/$30、Terra $2.50/$15、Luna $1/$6（每百万输入/输出 token）。目前仅向约20家经美国政府批准的合作机构开放，预计未来数周内逐步扩大可用范围。Sol 是 OpenAI 迄今最强模型，在编程、生物学和网络安全任务上有显著进步。
 - **为什么重要：** "访问须经政府批准"的模式是 AI 史上罕见先例，标志着顶尖 AI 能力已成为受国家管控的战略资产，而非完全开放的商业产品。
@@ -31,7 +31,7 @@ OpenAI 于6月26日发布 GPT-5.6 系列（Sol、Terra、Luna）限量预览，�
 ### 2. Anthropic 向美国参议院指控阿里巴巴旗下实验室大规模蒸馏 Claude 模型
 
 - **来源：** Bloomberg、Tom's Hardware、TechTimes
-- **链接：** https://www.bloomberg.com/news/articles/2026-06-24/anthropic-accuses-alibaba-of-illicitly-accessing-its-ai-models
+- **链接：** [https\://www\.bloomberg.com/news/articles/2026-06-24/anthropic-accuses-alibaba-of-illicitly-accessing-its-ai-models](https://www.bloomberg.com/news/articles/2026-06-24/anthropic-accuses-alibaba-of-illicitly-accessing-its-ai-models)
 - **核查状态：** 已核实
 - **发生了什么：** Anthropic 于6月10日向美国参议院银行委员会主席 Tim Scott 和排名委员 Elizabeth Warren 提交信函，指控阿里巴巴关联的 Qwen 实验室在2026年4月至6月间，使用约25,000个伪造账号和商业代理服务，与 Claude 进行了约2,880万次未授权交互，以"模型蒸馏"方式复制 Claude 的核心能力。此事件规模远超此前已披露的 DeepSeek、Moonshot AI、MiniMax 三家中国 AI 实验室合计约1,600万次蒸馏行为。
 - **为什么重要：** 模型蒸馏攻击允许竞争者以极低成本复制先进 AI 能力。Anthropic 将此事上升至美国国会层面，预示针对 AI 模型滥用的监管和执法行动可能升级，具有重大地缘政治含义。
@@ -45,7 +45,7 @@ OpenAI 于6月26日发布 GPT-5.6 系列（Sol、Terra、Luna）限量预览，�
 ### 3. OpenAI 联合 Broadcom 发布首款自研 AI 推理芯片 Jalapeño
 
 - **来源：** OpenAI 官方博客、Broadcom 投资者新闻稿、CNBC、TechCrunch、VentureBeat、Tom's Hardware
-- **链接：** https://openai.com/index/openai-broadcom-jalapeno-inference-chip/
+- **链接：** [https\://openai.com/index/openai-broadcom-jalapeno-inference-chip/](https://openai.com/index/openai-broadcom-jalapeno-inference-chip/)
 - **核查状态：** 已核实
 - **发生了什么：** 2026年6月24日，OpenAI 与 Broadcom 联合发布 Jalapeño 推理芯片——这是 OpenAI 的首款自研 AI 加速器，专为大语言模型推理任务优化。从初始设计到生产流片仅用9个月，是高性能 ASIC 有史以来最快的开发周期之一。早期测试显示 Jalapeño 每瓦性能显著优于现有最先进产品。计划于2026年底开始初步部署，并构建多代计算平台。
 - **为什么重要：** OpenAI 正在迈出摆脱英伟达 GPU 依赖、走向自研算力的关键一步。若成功，将显著降低 ChatGPT 的运营成本，并对英伟达长期市场地位构成战略压力。
@@ -59,7 +59,7 @@ OpenAI 于6月26日发布 GPT-5.6 系列（Sol、Terra、Luna）限量预览，�
 ### 4. 谷歌 AI 人才持续流失：Gemini 和 DeepMind 核心研究员相继转投 Anthropic
 
 - **来源：** Bloomberg、TechCrunch、The Next Web
-- **链接：** https://techcrunch.com/2026/06/24/ai-researchers-continue-to-leave-google-for-its-rivals/
+- **链接：** [https\://techcrunch.com/2026/06/24/ai-researchers-continue-to-leave-google-for-its-rivals/](https://techcrunch.com/2026/06/24/ai-researchers-continue-to-leave-google-for-its-rivals/)
 - **核查状态：** 已核实
 - **发生了什么：** 6月24日，Bloomberg 报道，谷歌 Gemini 核心研究员 Jonas Adler（曾主导 AI 编程项目）和 Alexander Pritzel（负责模型训练工作）即将离职并加入 Anthropic。此前，Gemini 联席主管 Noam Shazeer、AlphaFold 研究员（诺贝尔奖得主）John Jumper，以及 AI 安全研究工程师 Arthur Conmy 也相继离职并加入 OpenAI 或 Anthropic。谷歌内部研究人员已须排队争用 TPU 算力是人才流失原因之一；Anthropic 和 OpenAI 均面临 IPO，pre-IPO 期权激励也形成强大吸引力。
 - **为什么重要：** 人才是 AI 竞争最稀缺的资源。谷歌持续失去核心 AI 研究者，可能影响其下一代 Gemini 模型竞争力，同时进一步强化 Anthropic 和 OpenAI 的研发实力。
@@ -73,7 +73,7 @@ OpenAI 于6月26日发布 GPT-5.6 系列（Sol、Terra、Luna）限量预览，�
 ### 5. 美国多州 AI 立法提速：罗德岛签署心理健康 AI 禁令，加州 AI 教师禁令待签
 
 - **来源：** Transparency Coalition 立法更新（2026年6月26日）
-- **链接：** https://www.transparencycoalition.ai/news/ai-legislative-update-june26-2026
+- **链接：** [https\://www\.transparencycoalition.ai/news/ai-legislative-update-june26-2026](https://www.transparencycoalition.ai/news/ai-legislative-update-june26-2026)
 - **核查状态：** 部分核实
 - **发生了什么：** 6月26日，罗德岛州长 Dan McKee 签署三项 AI 相关法案，包括：禁止 AI 提供心理咨询服务（必须由持证专业人员主导）、要求 AI 聊天机器人内置自杀/自伤安全协议、要求医疗机构告知患者 AI 用于文档记录。同日，加利福尼亚州议会已通过禁止 AI 担任公立学校教师的法案，目前等待州长纽森签署。
 - **为什么重要：** AI 应用于心理健康和教育两个敏感领域正在面临明确的法律边界，直接影响相关 AI 产品的合规要求、市场准入和设计方向。
@@ -99,9 +99,7 @@ OpenAI 于6月26日发布 GPT-5.6 系列（Sol、Terra、Luna）限量预览，�
 ## 对学习者 / 开发者的影响
 
 1. **等 GPT-5.6 Luna 公开后，评估它与 DeepSeek V4-Pro 的性价比。** GPT-5.6 Luna 定价为 $1/$6 per M tokens，是 OpenAI 系列里最具成本竞争力的新入口；DeepSeek V4-Pro 大约为 $0.44/$0.87 per M tokens，价格更低，但合规风险不同。两者公开后值得在你自己的应用场景中做基准测试，而不是只看媒体报道的结论。（对应新闻1）
-
 2. **了解模型蒸馏攻击的原理和防御思路。** Anthropic/阿里巴巴事件表明，通过大规模 API 调用系统性地"蒸馏"出一个接近原模型能力的新模型，已经是真实的商业竞争手段。如果你在开发 AI 服务，速率限制、账号行为分析、异常检测等 API 安全机制的重要性需要重新评估。（对应新闻2）
-
 3. **关注心理健康、教育 AI 的立法动态，及时梳理产品合规要求。** 美国多州正在快速立法划定 AI 应用的边界。如果你在这些方向做产品，现在就要逐州梳理法规，而不是等法案生效后再被动应对。国家公共卫生法律中心（Public Health Law Center）和 NCSL 的 AI 立法数据库是值得定期查阅的来源。（对应新闻5）
 
 ---
@@ -109,9 +107,7 @@ OpenAI 于6月26日发布 GPT-5.6 系列（Sol、Terra、Luna）限量预览，�
 ## 对创业者的影响
 
 1. **顶尖 AI 能力正在变成"有条件开放"的资源，API 依赖风险需要正视。** GPT-5.6 需要政府批准才能使用，这说明依赖顶尖 API 的创业公司，未来可能面临访问被限制或条件收紧的风险，尤其是在地缘政治敏感时期。同时集成多个供应商（OpenAI、Anthropic、开源模型）不再只是成本优化策略，也是基本的风险管理动作。
-
 2. **AI 推理成本中期将持续下降，但不要指望短期内从 Jalapeño 获益。** Jalapeño 2026年底才初步部署，且主要为 OpenAI 自有产品线服务，不会直接降低你的 API 调用成本。但从更长周期来看，芯片竞争的加剧和 AI 推理效率的持续提升，将推动 API 价格持续下降，这对应用层创业者是结构性利好。
-
 3. **心理健康和教育类 AI 的监管门槛在上升，市场准入成本增加。** 如果你在美国市场做这两个方向的 AI 产品，必须把合规成本（法律顾问、州际合规评估、产品改造）纳入商业计划的核心假设，而不是当成"以后再说"的问题。进入成本提高，也意味着已合规的竞争者的护城河在增加。
 
 ---
@@ -146,3 +142,4 @@ OpenAI 于6月26日发布 GPT-5.6 系列（Sol、Terra、Luna）限量预览，�
 - **来源冲突：** 无明显冲突。
 - **因无法核实而排除的信息：** DeepSeek V4-Pro 永久降价（发生在5月，不属于过去24小时新闻，排除）；关于 Anthropic 和 OpenAI IPO 具体时间表的细节（存在报道中的不确定性，未纳入主要新闻）；GPT-5.6 第三方基准测试截图（未能从官方渠道核查完整数据，未引用）。
 - **时间窗口说明：** 新闻1（GPT-5.6）和新闻5（各州立法）发生于6月26日，在严格24小时窗口内。新闻2（Anthropic/阿里巴巴）、新闻3（Jalapeño 芯片）和新闻4（谷歌人才）发生于6月24日，超过严格24小时窗口约3天，但属于近期重大新闻并在本期报道时仍在持续发酵，已在各条新闻中明确标注事件日期。
+
