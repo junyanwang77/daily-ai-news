@@ -32,7 +32,7 @@
       "extra_env": {},
       "trigger": {
         "kind": "cron",
-        "cron": "0 0 * * *",
+        "cron": "0 9 * * *",
         "timezone": null
       },
       "platform_options": {
@@ -42,7 +42,7 @@
       },
       "log_retention_runs": 50,
       "created_at": "2026-06-09T06:40:39.967287Z",
-      "updated_at": "2026-06-28T02:18:58.507987Z",
+      "updated_at": "2026-07-15T12:43:42.105705Z",
       "claudepot_managed": true,
       "template_id": null,
       "disallowed_tools": [],
@@ -82,7 +82,7 @@
       "extra_env": {},
       "trigger": {
         "kind": "cron",
-        "cron": "15 0 * * *",
+        "cron": "15 9 * * *",
         "timezone": null
       },
       "platform_options": {
@@ -92,7 +92,7 @@
       },
       "log_retention_runs": 50,
       "created_at": "2026-06-11T01:23:25.657941Z",
-      "updated_at": "2026-06-12T14:03:03.917075Z",
+      "updated_at": "2026-07-15T12:44:04.102332Z",
       "claudepot_managed": true,
       "template_id": null,
       "disallowed_tools": [],
