@@ -1,0 +1,43 @@
+name: Daily AI News
+
+on:
+  schedule:
+    - cron: '0 1 * * *'   # UTC 01:00 = 北京时间 09:00
+  workflow_dispatch: {}    # 支持手动触发，方便调试
+
+permissions:
+  contents: write
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Generate today's briefing
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          claude -p "$(cat prompts/daily_ai_briefing.md)" \
+            --output-format text \
+            --model sonnet \
+            --permission-mode bypassPermissions \
+            --max-budget-usd 2 \
+            --fallback-model haiku \
+            --allowedTools "Read,Write,Bash,WebSearch,WebFetch"
+
+      - name: Publish (update latest + commit + push)
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          git config user.name "daily-ai-news-bot"
+          git config user.email "actions@users.noreply.github.com"
+          bash ./publish.sh

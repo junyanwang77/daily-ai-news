@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-cd "$HOME/Documents/daily-ai-news"
+cd "$(dirname "$0")"
 
 echo "Current directory:"
 pwd
@@ -183,9 +183,6 @@ cat > index.html <<HTML
 </body>
 </html>
 HTML
-
-echo "Syncing agents.json..."
-cp "$HOME/.claudepot/agents.json" agents.json
 
 echo "Git status before commit:"
 git status --short
