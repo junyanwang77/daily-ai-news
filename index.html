@@ -122,18 +122,10 @@
       </ul>
       <a class="btn" href="./daily-ai-briefing-latest-mobile.html?t=20260718">阅读最新一期</a>
       <div class="footer">
-        最新一期：<strong id="date-label">–</strong><br>
+        最新一期：<strong>2026 年 7 月 18 日</strong><br>
         每日自动生成 · 内容仅供信息参考
       </div>
     </div>
   </div>
-  <script>
-    var btn = document.querySelector('.btn');
-    var m = btn.href.match(/(\d{4})-(\d{2})-(\d{2})/);
-    if (m) {
-      document.getElementById('date-label').textContent =
-        m[1] + ' 年 ' + parseInt(m[2]) + ' 月 ' + parseInt(m[3]) + ' 日';
-    }
-  </script>
 </body>
 </html>

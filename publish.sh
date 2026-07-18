@@ -35,6 +35,10 @@ if [ "$html_date" != "$md_date" ]; then
 fi
 
 compact_date=$(echo "$html_date" | tr -d '-')
+display_year="${html_date:0:4}"
+display_month="${html_date:5:2}"
+display_day="${html_date:8:2}"
+display_date="${display_year} 年 ${display_month#0} 月 ${display_day#0} 日"
 
 echo "Updating latest files..."
 cp "$latest_html" daily-ai-briefing-latest-mobile.html
@@ -175,19 +179,11 @@ cat > index.html <<HTML
       </ul>
       <a class="btn" href="./daily-ai-briefing-latest-mobile.html?t=$compact_date">阅读最新一期</a>
       <div class="footer">
-        最新一期：<strong id="date-label">–</strong><br>
+        最新一期：<strong>$display_date</strong><br>
         每日自动生成 · 内容仅供信息参考
       </div>
     </div>
   </div>
-  <script>
-    var btn = document.querySelector('.btn');
-    var m = btn.href.match(/(\d{4})-(\d{2})-(\d{2})/);
-    if (m) {
-      document.getElementById('date-label').textContent =
-        m[1] + ' 年 ' + parseInt(m[2]) + ' 月 ' + parseInt(m[3]) + ' 日';
-    }
-  </script>
 </body>
 </html>
 HTML
