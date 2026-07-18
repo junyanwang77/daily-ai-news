@@ -40,6 +40,14 @@ echo "Updating latest files..."
 cp "$latest_html" daily-ai-briefing-latest-mobile.html
 cp "$latest_md" daily-ai-briefing-latest.md
 
+archive_dir="archive/${html_date:0:7}"
+if [ "$(dirname "$latest_html")" != "$archive_dir" ]; then
+  echo "Archiving dated files into $archive_dir..."
+  mkdir -p "$archive_dir"
+  mv -f "$latest_html" "$archive_dir/"
+  mv -f "$latest_md" "$archive_dir/"
+fi
+
 echo "Updating index.html to published date: $html_date"
 
 cat > index.html <<HTML
@@ -165,7 +173,7 @@ cat > index.html <<HTML
         <li>涵盖模型发布、产品更新、开源项目与监管变化</li>
         <li>提供对普通人、开发者、创业者的具体分析</li>
       </ul>
-      <a class="btn" href="./$latest_html?t=$compact_date">阅读最新一期</a>
+      <a class="btn" href="./daily-ai-briefing-latest-mobile.html?t=$compact_date">阅读最新一期</a>
       <div class="footer">
         最新一期：<strong id="date-label">–</strong><br>
         每日自动生成 · 内容仅供信息参考
