@@ -2,7 +2,7 @@ name: Daily AI News
 
 on:
   schedule:
-    - cron: '12 2 * * *'  # UTC 02:12 = 北京时间 10:12（临时改动，用于验证定时触发是否生效）
+    - cron: '37 2 * * *'  # UTC 02:37 = 北京时间 10:37（临时改动，用于验证定时触发是否生效，留足生效时间后不再改动）
   workflow_dispatch: {}    # 支持手动触发，方便调试
 
 permissions:
