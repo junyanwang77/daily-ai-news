@@ -1,10 +1,7 @@
 name: Daily AI News
 
 on:
-  schedule:
-    - cron: '15 1 * * *'  # UTC 01:15 = 北京时间 09:15
-    - cron: '15 2 * * *'  # UTC 02:15 = 北京时间 10:15，作为备用触发
-  workflow_dispatch: {}    # 支持手动触发，方便调试
+  workflow_dispatch: {}    # 由 cron-job.org 每天北京时间 08:40 调用 API 触发，GitHub 自带 schedule 延迟不可靠，已弃用
 
 permissions:
   contents: write
