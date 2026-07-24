@@ -46,7 +46,6 @@ jobs:
             --output-format text \
             --model sonnet \
             --permission-mode bypassPermissions \
-            --max-budget-usd 2 \
             --fallback-model haiku \
             --allowedTools "Read,Write,Bash,WebSearch,WebFetch"
 
