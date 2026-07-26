@@ -21,7 +21,7 @@ jobs:
           today="$(date +%F)"
           echo "date=$today" >> "$GITHUB_OUTPUT"
 
-          if [ "${{ github.event_name }}" != "workflow_dispatch" ] && [ -f "archive/${today:0:7}/daily-ai-briefing-${today}.md" ]; then
+          if [ -f "archive/${today:0:7}/daily-ai-briefing-${today}.md" ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
             echo "Today's briefing already exists: $today"
           else
