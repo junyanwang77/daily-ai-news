@@ -56,4 +56,4 @@ jobs:
         run: |
           git config user.name "daily-ai-news-bot"
           git config user.email "actions@users.noreply.github.com"
-          bash ./publish.sh
+          bash ./publish.sh "${{ steps.today.outputs.date }}"

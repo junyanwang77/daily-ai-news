@@ -6,53 +6,45 @@ cd "$(dirname "$0")"
 echo "Current directory:"
 pwd
 
-echo "Finding latest dated briefing files..."
+briefing_date="${1:-$(date +%F)}"
 
-latest_html=$(ls -t daily-ai-briefing-20*-mobile.html 2>/dev/null | head -1)
-latest_md=$(ls -t daily-ai-briefing-20*.md 2>/dev/null | head -1)
-
-if [ -z "$latest_html" ]; then
-  echo "No dated mobile HTML briefing found."
+if ! [[ "$briefing_date" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+  echo "Invalid date: $briefing_date"
   exit 1
 fi
 
-if [ -z "$latest_md" ]; then
-  echo "No dated Markdown briefing found."
+echo "Publishing briefing date: $briefing_date"
+
+latest_html="daily-ai-briefing-${briefing_date}-mobile.html"
+latest_md="daily-ai-briefing-${briefing_date}.md"
+
+if [ ! -f "$latest_html" ]; then
+  echo "Expected HTML file not found: $latest_html"
   exit 1
 fi
 
-html_date=$(echo "$latest_html" | sed -E 's/daily-ai-briefing-([0-9]{4}-[0-9]{2}-[0-9]{2})-mobile.html/\1/')
-md_date=$(echo "$latest_md" | sed -E 's/daily-ai-briefing-([0-9]{4}-[0-9]{2}-[0-9]{2}).md/\1/')
-
-echo "Latest HTML: $latest_html"
-echo "Latest MD: $latest_md"
-echo "HTML date: $html_date"
-echo "MD date: $md_date"
-
-if [ "$html_date" != "$md_date" ]; then
-  echo "HTML date and Markdown date do not match. Stop publishing."
+if [ ! -f "$latest_md" ]; then
+  echo "Expected Markdown file not found: $latest_md"
   exit 1
 fi
 
-compact_date=$(echo "$html_date" | tr -d '-')
-display_year="${html_date:0:4}"
-display_month="${html_date:5:2}"
-display_day="${html_date:8:2}"
+compact_date=$(echo "$briefing_date" | tr -d '-')
+display_year="${briefing_date:0:4}"
+display_month="${briefing_date:5:2}"
+display_day="${briefing_date:8:2}"
 display_date="${display_year} 年 ${display_month#0} 月 ${display_day#0} 日"
 
 echo "Updating latest files..."
 cp "$latest_html" daily-ai-briefing-latest-mobile.html
 cp "$latest_md" daily-ai-briefing-latest.md
 
-archive_dir="archive/${html_date:0:7}"
-if [ "$(dirname "$latest_html")" != "$archive_dir" ]; then
-  echo "Archiving dated files into $archive_dir..."
-  mkdir -p "$archive_dir"
-  mv -f "$latest_html" "$archive_dir/"
-  mv -f "$latest_md" "$archive_dir/"
-fi
+archive_dir="archive/${briefing_date:0:7}"
+echo "Archiving dated files into $archive_dir..."
+mkdir -p "$archive_dir"
+mv -f "$latest_html" "$archive_dir/"
+mv -f "$latest_md" "$archive_dir/"
 
-echo "Updating index.html to published date: $html_date"
+echo "Updating index.html to published date: $briefing_date"
 
 cat > index.html <<HTML
 <!doctype html>
@@ -198,7 +190,7 @@ if git diff --cached --quiet; then
   exit 0
 fi
 
-commit_msg="Update daily AI briefing $html_date"
+commit_msg="Update daily AI briefing $briefing_date"
 git commit -m "$commit_msg"
 git push
 
