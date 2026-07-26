@@ -49,6 +49,11 @@ jobs:
             --fallback-model haiku \
             --allowedTools "Read,Write,Bash,WebSearch,WebFetch"
 
+      - name: Validate generated briefing
+        if: steps.today.outputs.skip != 'true'
+        run: |
+          python3 validate_briefing.py "${{ steps.today.outputs.date }}"
+
       - name: Publish (update latest + commit + push)
         if: steps.today.outputs.skip != 'true'
         env:
