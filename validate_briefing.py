@@ -81,8 +81,8 @@ def main():
                 news_items.append(block)
 
     if not offline:
-        if len(news_items) == 0:
-            errors.append('"今日最值得关注"板块没有解析到任何新闻条目')
+        # 0 条是合法情况：过去 24 小时内可能确实没有足够重要/可核实的新闻
+        # （此时该板块应有文字说明原因），不应视为校验失败。
         if len(news_items) > 5:
             errors.append(f'新闻条目数量超过 5 条（实际 {len(news_items)} 条）')
 
