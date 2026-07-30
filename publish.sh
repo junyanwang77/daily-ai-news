@@ -44,6 +44,113 @@ mkdir -p "$archive_dir"
 mv -f "$latest_html" "$archive_dir/"
 mv -f "$latest_md" "$archive_dir/"
 
+echo "Regenerating archive.html..."
+
+archive_list=""
+current_month=""
+while IFS= read -r f; do
+  fname=$(basename "$f")
+  d="${fname#daily-ai-briefing-}"
+  d="${d%-mobile.html}"
+  y="${d:0:4}"; mo="${d:5:2}"; da="${d:8:2}"
+  month_key="${y}-${mo}"
+  if [ "$month_key" != "$current_month" ]; then
+    if [ -n "$current_month" ]; then
+      archive_list+=$'  </ul>\n</div>\n'
+    fi
+    archive_list+="<div class=\"month\">
+  <h2>${y} 年 ${mo#0} 月</h2>
+  <ul>
+"
+    current_month="$month_key"
+  fi
+  archive_list+="    <li><a href=\"./${f}?t=$(echo "$d" | tr -d '-')\">${y} 年 ${mo#0} 月 ${da#0} 日</a></li>
+"
+done < <(find archive -name 'daily-ai-briefing-*-mobile.html' | sort -r)
+if [ -n "$current_month" ]; then
+  archive_list+=$'  </ul>\n</div>\n'
+fi
+
+cat > archive.html <<HTML
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>往期回顾 · 每日 AI 要闻</title>
+  <meta name="robots" content="noindex">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+      background: #f2f2f7;
+      padding: 32px 16px 48px;
+    }
+    .wrap {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .header {
+      background: #111;
+      color: #fff;
+      padding: 24px 24px 22px;
+      border-radius: 20px 20px 0 0;
+    }
+    .back {
+      display: inline-block;
+      color: rgba(255,255,255,.55);
+      text-decoration: none;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+    .title {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .card {
+      background: #fff;
+      border-radius: 0 0 20px 20px;
+      padding: 8px 24px 24px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04);
+    }
+    .month h2 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #999;
+      letter-spacing: 0.05em;
+      margin: 22px 0 6px;
+    }
+    .month ul { list-style: none; }
+    .month li {
+      border-bottom: 1px solid #f5f5f5;
+    }
+    .month li:last-child { border-bottom: none; }
+    .month a {
+      display: block;
+      padding: 12px 4px;
+      color: #222;
+      text-decoration: none;
+      font-size: 15px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .month a:active { color: #999; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <a class="back" href="./index.html">‹ 返回首页</a>
+      <div class="title">往期回顾</div>
+    </div>
+    <div class="card">
+$archive_list    </div>
+  </div>
+</body>
+</html>
+HTML
+
 echo "Updating index.html to published date: $briefing_date"
 
 cat > index.html <<HTML
@@ -146,6 +253,10 @@ cat > index.html <<HTML
       margin-bottom: 16px;
       -webkit-tap-highlight-color: transparent;
     }
+    .btn-secondary {
+      background: #f2f2f7;
+      color: #111;
+    }
     .footer {
       text-align: center;
       color: #bbb;
@@ -170,6 +281,7 @@ cat > index.html <<HTML
         <li>提供对普通人、开发者、创业者的具体分析</li>
       </ul>
       <a class="btn" href="./daily-ai-briefing-latest-mobile.html?t=$compact_date">阅读最新一期</a>
+      <a class="btn btn-secondary" href="./archive.html">查看往期回顾</a>
       <div class="footer">
         最新一期：<strong>$display_date</strong><br>
         每日自动生成 · 内容仅供信息参考
