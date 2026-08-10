@@ -11,11 +11,18 @@ A fully automated daily Chinese-language AI news briefing. A GitHub Actions work
 Generate today's briefing locally (same command the workflow runs):
 
 ```bash
-claude -p "$(cat prompts/daily_ai_briefing.md)" \
+claude -p "现在开始执行《每日 AI 要闻》生成任务：生成 $(date +%F) 的 Markdown 简报，并按规格用 make_html.py 生成对应的手机版 HTML。" \
+  --append-system-prompt-file prompts/daily_ai_briefing.md \
   --model sonnet \
   --permission-mode bypassPermissions \
   --allowedTools "Read,Write,Bash,WebSearch,WebFetch"
 ```
+
+The spec goes in via `--append-system-prompt-file`, **not** as the `-p` positional argument.
+Passed as `-p "$(cat prompts/daily_ai_briefing.md)"`, the CLI intermittently drops the whole
+17KB argument — the model then sees only the project context, replies that it can't find a
+request, and exits 0 without writing anything. Measured at roughly 3-in-4 runs, and it caused
+the 2026-08-08 and 2026-08-10 workflow failures.
 
 Validate a generated briefing before publishing:
 

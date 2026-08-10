@@ -41,13 +41,34 @@ jobs:
         if: steps.today.outputs.skip != 'true'
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          BRIEFING_DATE: ${{ steps.today.outputs.date }}
+        # 规格通过 --append-system-prompt-file 传入，而不是作为 -p 的位置参数。
+        # 把 17KB 的规格当 -p 参数传时，CLI 会间歇性地整段丢掉它（模型只收到项目
+        # 上下文，回复“没看到具体请求”后 0 退出码结束，一个文件都不写），
+        # 2026-08-08 和 2026-08-10 两次失败都是这个原因。
         run: |
-          claude -p "$(cat prompts/daily_ai_briefing.md)" \
-            --output-format text \
-            --model sonnet \
-            --permission-mode bypassPermissions \
-            --fallback-model haiku \
-            --allowedTools "Read,Write,Bash,WebSearch,WebFetch"
+          md="daily-ai-briefing-${BRIEFING_DATE}.md"
+
+          for attempt in 1 2 3; do
+            echo "::group::Generation attempt ${attempt}"
+            claude -p "现在开始执行《每日 AI 要闻》生成任务：生成 ${BRIEFING_DATE} 的 Markdown 简报，并按规格用 make_html.py 生成对应的手机版 HTML。" \
+              --append-system-prompt-file prompts/daily_ai_briefing.md \
+              --output-format text \
+              --model sonnet \
+              --permission-mode bypassPermissions \
+              --fallback-model haiku \
+              --allowedTools "Read,Write,Bash,WebSearch,WebFetch" || true
+            echo "::endgroup::"
+
+            if [ -f "$md" ]; then
+              echo "Generated ${md} on attempt ${attempt}."
+              exit 0
+            fi
+            echo "Attempt ${attempt} produced no ${md}."
+          done
+
+          echo "::error::Claude produced no ${md} after 3 attempts."
+          exit 1
 
       - name: Validate generated briefing
         if: steps.today.outputs.skip != 'true'
