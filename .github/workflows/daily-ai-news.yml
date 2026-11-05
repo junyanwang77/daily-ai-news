@@ -58,7 +58,7 @@ jobs:
           sandbox: workspace-write
           safety-strategy: drop-sudo
           effort: medium
-          codex-args: '["-c", "web_search=\"live\"", "-c", "sandbox_workspace_write.network_access=true"]'
+          codex-args: '["-c", "web_search=\"live\""]'
           prompt: |
             你负责生成 ${{ needs.prepare.outputs.date }} 的中文每日 AI 要闻。
             先读取 prompts/daily_ai_briefing.md，并遵守其中的事实核查、六类搜索、格式和文件限制。
