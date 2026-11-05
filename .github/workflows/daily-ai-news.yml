@@ -57,6 +57,7 @@ jobs:
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
           sandbox: workspace-write
           safety-strategy: drop-sudo
+          model: gpt-5.5
           effort: medium
           codex-args: '["-c", "web_search=\"live\""]'
           prompt: |
@@ -64,6 +65,7 @@ jobs:
             先读取 prompts/daily_ai_briefing.md，并遵守其中的事实核查、六类搜索、格式和文件限制。
             本任务运行在 Codex，不要执行 CLAUDE.md 中的 Claude CLI 命令，也不要依赖 Claude 账号。
             必须使用实时联网检索并阅读原文，优先核对发布日期和事件时间；旧闻不能作为新发布。
+            优先使用内置 web_search 工具搜索和打开原文，不要用 Bash、curl 或 urllib 模拟搜索；命令行网络在沙箱内受限。
             写 daily-ai-briefing-${{ needs.prepare.outputs.date }}.md 后，运行 python3 make_html.py ${{ needs.prepare.outputs.date }}。
             只允许创建这两个当天文件；不要修改现有文件、归档、首页、脚本或工作流。
             不要提交、推送或运行 publish.sh，后续独立作业负责验证与发布。
