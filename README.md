@@ -1,6 +1,18 @@
 # 每日 AI 要闻 · Daily AI News
 
-> 每天自动生成一份中文 AI 行业简报，覆盖过去 24 小时内全球最值得关注的 AI 动态，并发布为手机友好的网页。
+> 由 Codex 联网核查并生成中文 AI 行业简报，覆盖过去 24 小时的重要动态，发布为手机友好的网页。
+
+## 当前自动化（Codex）
+
+Claude 生成流程已替换为官方 Codex GitHub Action。保留 cron-job.org 每天北京时间 08:40 调用 `workflow_dispatch` 的外部触发方式，不依赖本地电脑。原有 Claude 配置说明仅供历史参考。
+
+在仓库 Settings → Secrets and variables → Actions 配置 `OPENAI_API_KEY`。使用官方 API 必须符合其支持地区及账号使用条件；API 和联网搜索会产生相应费用。
+
+流程为：检查当天是否已发布 → Codex 实时搜索和生成 → 输出限制及结构校验 → 独立作业重新生成 HTML → 归档并发布。生成作业只有仓库读取权限，不保存 Git 推送凭证；发布作业不使用模型密钥。无法联网、缺失文件或修改了已有文件时停止，不覆盖上一期。
+
+手动测试：Actions → Daily AI News → Run workflow → 勾选 `dry_run`。测试会重新生成当天稿件并保存七天的 Markdown artifact，但不会覆盖已发布内容。取消勾选则正常发布；已有当天归档时跳过。GitHub Actions 的失败通知请在个人通知设置中启用，项目未另配邮件发送服务。
+
+封面和以后生成的首页统一标注“由 Codex 自动生成”。校验只检查结构与发布条件，不能代替事实核查。
 
 🔗 在线阅读：https://junyanwang77.github.io/daily-ai-news/
 
@@ -11,7 +23,7 @@
 - **多维度解读**：不只是新闻链接堆砌，每条要闻都会说明发生了什么、为什么重要、影响谁、是否可靠
 - **手机阅读友好**：自动将 Markdown 转换为卡片式排版的移动端 HTML
 
-## 工作原理
+## 历史工作原理（Claude，已停用）
 
 ```
 GitHub Actions（定时 / 手动触发）
@@ -46,7 +58,7 @@ GitHub Actions（定时 / 手动触发）
 └── daily-ai-briefing-YYYY-MM-DD-mobile.html  # 每日简报（手机阅读版）
 ```
 
-## 本地运行 / 自行部署
+## 历史运行说明（Claude，已停用）
 
 如果你想 fork 本项目，在自己的仓库里跑起同样的自动化：
 

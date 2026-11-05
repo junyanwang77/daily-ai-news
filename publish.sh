@@ -284,7 +284,7 @@ cat > index.html <<HTML
       <a class="btn btn-secondary" href="./archive.html">查看往期回顾</a>
       <div class="footer">
         最新一期：<strong>$display_date</strong><br>
-        每日自动生成 · 内容仅供信息参考
+        由 Codex 自动生成 · 内容仅供信息参考
       </div>
     </div>
   </div>
