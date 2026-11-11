@@ -1,108 +1,60 @@
 # 每日 AI 要闻 · Daily AI News
 
-> 由 Codex 联网核查并生成中文 AI 行业简报，覆盖过去 24 小时的重要动态，发布为手机友好的网页。
+由 Codex 联网核查并生成中文 AI 简报，覆盖过去24小时的重要动态，发布为手机友好的网页。
 
-## 当前自动化（Codex）
+在线阅读：https://junyanwang77.github.io/daily-ai-news/
 
-Claude 生成流程已替换为官方 Codex GitHub Action。保留 cron-job.org 每天北京时间 08:40 调用 `workflow_dispatch` 的外部触发方式，不依赖本地电脑。原有 Claude 配置说明仅供历史参考。
+## 当前自动化：ChatGPT 订阅
 
-在仓库 Settings → Secrets and variables → Actions 配置 `OPENAI_API_KEY`。使用官方 API 必须符合其支持地区及账号使用条件；API 和联网搜索会产生相应费用。
+2026-11-11 起改用 Mac 上 Codex CLI 的 ChatGPT 登录额度，每天北京时间 **08:40** 生成、独立复核并发布。电脑必须开机、联网且用户已登录。错过时间后，登录/唤醒时补检查当天任务；关机期间无法生产，不自动补往期。订阅额度不足或登录过期时停止，不回退到 API。
 
-流程为：检查当天是否已发布 → Codex（GPT-5.5）实时搜索和生成 → 新会话逐条打开原文复核 → 输出限制及结构校验 → 独立作业重新生成 HTML → 归档并发布。生成作业只有仓库读取权限，不保存 Git 推送凭证；发布作业不使用模型密钥。无法联网、没有可通过原文核查的候选、缺失文件或修改了已有文件时停止，不覆盖上一期。原文复核仍由模型执行，不能保证杜绝事实错误。
+旧 GitHub 工作流只显示迁移提示，**不再调用模型或 API**，cron-job.org 的旧触发不会消耗 API 余额。GitHub Pages 仍在 push 后部署。ChatGPT 登录凭证只留本机，不上传到公开仓库或 Actions Secret。参考 [官方认证文档](https://learn.chatgpt.com/docs/auth)。
 
-手动测试：Actions → Daily AI News → Run workflow → 勾选 `dry_run`。测试会重新生成当天稿件并保存七天的 Markdown artifact，但不会覆盖已发布内容。取消勾选则正常发布；已有当天归档时跳过。GitHub Actions 的失败通知请在个人通知设置中启用，项目未另配邮件发送服务。
+### 安装与管理
 
-封面和以后生成的首页统一标注“由 Codex 自动生成”。校验只检查结构与发布条件，不能代替事实核查。
+在项目目录执行：
 
-🔗 在线阅读：https://junyanwang77.github.io/daily-ai-news/
-
-## 特点
-
-- **每日自动更新**：通过 GitHub Actions 定时任务，每天北京时间 9:00 左右自动生成并发布，无需人工干预
-- **真实性优先**：生成简报的 Prompt 内置了严格的事实核查规则——要求交叉验证信源、标注可信度、禁止编造新闻/链接/数据，无法核实的内容会被明确标注而非编造
-- **多维度解读**：不只是新闻链接堆砌，每条要闻都会说明发生了什么、为什么重要、影响谁、是否可靠
-- **手机阅读友好**：自动将 Markdown 转换为卡片式排版的移动端 HTML
-
-## 历史工作原理（Claude，已停用）
-
-```
-GitHub Actions（定时 / 手动触发）
-        │
-        ▼
-  claude -p 按照 prompts/daily_ai_briefing.md 的要求：
-  联网搜索 → 抓取核实 → 生成当日 Markdown
-        │
-        ▼
-  python3 make_html.py  →  生成手机阅读版 HTML
-        │
-        ▼
-  publish.sh：更新 latest 文件与首页 index.html，
-  commit + push 回本仓库
-        │
-        ▼
-  GitHub Pages 自动发布最新页面
+```bash
+codex login                             # 选择 ChatGPT；已登录无需重复
+python3 scripts/subscription_daily.py --check
+python3 scripts/subscription_daily.py --install
+python3 scripts/subscription_daily.py --status
 ```
 
-整套流程通过 [`.github/workflows/daily-ai-news.yml`](.github/workflows/daily-ai-news.yml) 编排，全部运行在 GitHub 的服务器上，不依赖任何本地设备。
+安装的 macOS LaunchAgent 每15分钟检查一次当天是否需要生产，08:40 到时也会触发。同一天最多自动尝试一次，避免故障反复消耗订阅额度。修复失败原因后执行 `python3 scripts/subscription_daily.py --retry` 显式重试；`--draft-only` 生成并复核但不发布。已有当天归档时不再生成。
+
+- 运行记录、日志和中间稿：`~/Library/Application Support/daily-ai-news/YYYY-MM-DD/`
+- 定时配置：`~/Library/LaunchAgents/com.wangyuan.daily-ai-news.subscription.plist`
+- 不必打开 Codex 窗口，但须保留 CLI、ChatGPT 登录和本机 GitHub 推送权限。
+- 停用定时任务：`launchctl bootout gui/$(id -u)/com.wangyuan.daily-ai-news.subscription`
+
+### 生产流程
+
+检查 ChatGPT 登录 → 独立临时克隆 → GPT-5.5 实时搜索生成 → 新会话逐条打开原文复核 → 输出限制和结构校验 → 生成 HTML → 更新首页与归档 → 推送 → GitHub Pages 部署。
+
+两次模型调用均强制 ChatGPT 身份、移除 API 环境变量、忽略个人模型配置，使用 workspace-write 沙箱。日志不包含登录凭证。模型不负责提交或发布；脚本只在校验通过后执行发布。无法联网、无合格候选、缺失文件或修改已有文件时停止，不覆盖上一期。原文复核仍由模型执行，不能保证杜绝事实错误。
+
+封面统一标注“由 Codex 自动生成”。
 
 ## 项目结构
 
-```
-.
-├── .github/workflows/daily-ai-news.yml   # 定时任务：生成 + 发布
-├── prompts/daily_ai_briefing.md          # 生成简报所用的完整 Prompt
-├── make_html.py                          # Markdown → 手机端 HTML 转换脚本
-├── publish.sh                            # 更新 latest 文件、生成首页、commit & push
-├── index.html                            # 网站首页（自动生成，指向最新一期）
-├── daily-ai-briefing-YYYY-MM-DD.md       # 每日简报（Markdown 原文）
-└── daily-ai-briefing-YYYY-MM-DD-mobile.html  # 每日简报（手机阅读版）
-```
-
-## 历史运行说明（Claude，已停用）
-
-如果你想 fork 本项目，在自己的仓库里跑起同样的自动化：
-
-### 1. 准备 Claude Code 的鉴权凭证
-
-本项目使用 [Claude Code](https://docs.claude.com/en/docs/claude-code) CLI 生成内容。若你有 Claude Pro/Max 订阅，可在本地终端执行：
-
-```bash
-claude setup-token
-```
-
-按提示在浏览器完成授权后，会得到一个长期有效的 OAuth token。
-
-### 2. 配置 GitHub Actions Secret
-
-在你 fork 后的仓库中，进入 `Settings → Secrets and variables → Actions`，新增一个 Secret：
-
-| Name | Value |
+| 文件 | 用途 |
 |---|---|
-| `CLAUDE_CODE_OAUTH_TOKEN` | 上一步得到的 token |
+| `scripts/subscription_daily.py` | 本机订阅生产与定时任务管理 |
+| `prompts/daily_ai_briefing.md` | 内容规范与事实核查要求 |
+| `prompts/subscription_generate.md` | 生成阶段指令 |
+| `prompts/subscription_review.md` | 独立复核指令 |
+| `make_html.py` | Markdown 转手机端 HTML |
+| `validate_briefing.py` | 结构与字段校验 |
+| `check_generated_briefing.py` | 文件范围和发布条件检查 |
+| `publish.sh` | 更新最新一期、首页和归档，提交并推送 |
+| `.github/workflows/daily-ai-news.yml` | 旧触发入口迁移提示，不调用 API |
+| `archive/YYYY-MM/` | 已发布的历史简报 |
 
-### 3. 启用 GitHub Pages
+## 历史迁移
 
-进入 `Settings → Pages`，Source 选择 `Deploy from a branch`，分支选 `main`，目录选 `/ (root)`。
-
-### 4. 手动触发一次测试
-
-进入 `Actions` 标签页，选择 `Daily AI News` workflow，点击 `Run workflow` 手动触发一次，确认能成功生成并发布。
-
-之后每天会按 [workflow 文件](.github/workflows/daily-ai-news.yml) 中设置的 cron 时间自动运行，也可以随时手动触发。
-
-## 本地手动生成（可选）
-
-无需等待定时任务，也可以在本地直接生成当天简报：
-
-```bash
-claude -p "$(cat prompts/daily_ai_briefing.md)" \
-  --model sonnet \
-  --permission-mode bypassPermissions \
-  --allowedTools "Read,Write,Bash,WebSearch,WebFetch"
-
-bash ./publish.sh
-```
+原 Claude 订阅流程已停用。2026-11-05 至 11-10 曾使用 Codex GitHub Action + OpenAI API 生成和复核，API 单独计费；2026-11-11 改为本机 ChatGPT 订阅。旧 API Secret 不再被任何生产步骤引用。
 
 ## 免责声明
 
-简报内容由 AI 自动联网搜索、核实并生成，虽然 Prompt 中内置了严格的事实核查与信源交叉验证要求，仍可能存在遗漏或误判。请将其作为信息参考，重要决策请以官方一手信息为准。
+简报由 AI 联网搜索、核查并生成，仍可能存在遗漏或误判。请作为信息参考，重要决策以官方一手信息为准。
