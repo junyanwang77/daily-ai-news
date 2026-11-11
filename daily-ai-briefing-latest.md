@@ -1,82 +1,102 @@
 # 每日 AI 要闻
 
-日期：2026-11-09
+日期：2026-11-11
 覆盖范围：过去 24 小时
 版本：当日自动生成版
 
+筛选窗口：北京时间 2026-11-10 15:33 至 2026-11-11 15:33，沿用当期初稿的固定窗口。本轮独立核查于北京时间 2026-11-11 15:36 开始。保留的 4 篇原文均显示发布日期 2026-11-10，未显示具体时刻和时区，时间边界不确定，不能确认全部严格落入该窗口。
+
 ## 先说结论
 
-- NVIDIA 董事会调查是本次核查中最明确、最有影响力的过去 24 小时 AI 基础设施新闻。
-- 美国 AI 安全评估机构的独立性问题有 AP 正文支撑，但关键安排来自匿名消息源，应降低确定性。
-- xAI/Grok 水印文档可访问，但页面最后更新时间早于今天，不应计入今日主新闻。
+- 本期关注软件验证、机器人及企业 AI 部署公告。
+- 用户与企业需区分功能开放和厂商效果声明。
+- 四条均有时间边界不确定性，采用前需核对条件。
 
 ## 今日最值得关注的 5 件事
 
-过去 24 小时内可核实且足够重要的 AI 新闻不足 5 条，因此本期只收录 2 条。
+过去 24 小时内可核实且足够重要的 AI 新闻不足 5 条，因此本期只收录 4 条。四条公告正文已读，但页面只有日期，均按“部分核实”保留并注明时间边界不确定，不代表严格的 24 小时时效已获确认；未新增新闻补足数量。
 
-### 1. NVIDIA 董事会就 CEO 遭外部情报接触报道启动独立调查
+### 1. DeepMind 发布 AlphaProof Code，验证 Signal 核心协议代码
 
-- 来源：NVIDIA Newsroom；AP News
-- 链接：https://nvidianews.nvidia.com/news/statement-from-nvidia-board-of-directors
-- 核查状态：已核实
-- 发生了什么：NVIDIA 董事会 11 月 8 日发布《Statement from NVIDIA Board of Directors》，称将就近期关于 CEO Jensen Huang 成为“外国情报行动目标”的报道启动独立调查，由独立董事委员会和外部律师监督。董事会称目前没有理由认为国家安全或公司机密已受损，Huang 将配合调查。
-- 为什么重要：NVIDIA 是 AI 算力供应链核心公司，管理层安全、出口管制和中美芯片流向会直接影响云厂商、模型公司和投资者信心。
-- 影响对象：开发者 / 创业者 / 企业 / 投资者
-- 重要性评分：9
-- 可信度：高
-- 备注：原文可访问；原文标题为《Statement from NVIDIA Board of Directors》，页面日期为 2026-11-08，正文未给出精确发布时间。已核实的是董事会调查和官方表述；关于外部报道中的个人关系、情报判断和第三方指控，本简报不作确定结论。
-
-### 2. AP 报道美国 AI 安全评估机构被要求向白宫办公室非正式汇报
-
-- 来源：Associated Press
-- 链接：https://www.wect.com/2026/11/08/staff-us-center-ai-safety-are-reporting-white-house-raising-independence-concerns/
+- 来源：Google DeepMind 官方博客
+- 链接：[Introducing AlphaProof Code: a breakthrough in verifying complex software at depth](https://deepmind.google/blog/introducing-alphaproof-code/)
 - 核查状态：部分核实
-- 发生了什么：AP 署名稿《Staff at the US center for AI safety are reporting to the White House, raising independence concerns》11 月 8 日报道，美国商务部下属 CAISSI 缺少常任负责人，且已停止公开部分安全研究；两名前政府官员称该机构人员近期被要求向白宫办公室非正式汇报。报道还写到，白宫未直接回应 CAISSI 细节，但表示政府将推动其“Super Intelligence”议程。
-- 为什么重要：政府是否能独立评测前沿模型，会影响 AI 安全、网络安全、生物风险和企业自律边界。若安全测试更偏国家安全和保密逻辑，公众透明度可能下降。
-- 影响对象：普通用户 / 企业 / 投资者 / 研究者
+- 发生了什么：DeepMind 在 11 月 10 日公告中称，AlphaProof Code 的流程是：专家审核安全规格，AI 生成证明，由 Lean 检查，并宣布开放验证产物。
+- 为什么重要：把 AI 产出接入机器检查流程，有助于提高软件安全保证；结论仅覆盖指定性质，不能解释为整个 Signal 无漏洞。
+- 影响对象：开发者 / 企业 / 研究者
 - 重要性评分：8
 - 可信度：中
-- 备注：AP 原文页可定位；本次可完整读取正文、署名、时间和版权信息的是 AP 署名转载页。转载页显示发布时间为 2026-11-08 1:50 PM EST，正文事件时间表述为“recently”，未给出具体日期；非正式汇报安排主要依据两名前政府官员匿名说法，暂未看到 CAISSI 或白宫针对该安排的完整公开确认。
+- 备注：公告日期 2026-11-10，时间边界不确定；正文称验证耗时四周，未给出研究完成日；当日是成果公告，未独立复现，也未核验开放产物。
 
-## 持续关注
+### 2. Gemini Robotics 2.5 开始向机器人合作伙伴推出
 
-- **xAI/Grok API 文本水印**：xAI 文档《Output Watermarking》可访问，页面写明自 2026-11-07 起部分 Grok 文本模型默认加入不可见水印，团队管理员可按模型选择退出，响应可通过 `x-watermark` 头部查看。但该页面最后更新时间为 2026-10-31，因此本次不把它作为过去 24 小时主新闻，只作为开发者合规跟踪项。
+- 来源：Google DeepMind 官方博客
+- 链接：[Gemini Robotics 2.5 accelerates real-world general dexterity](https://deepmind.google/blog/gemini-robotics-2-5-accelerates-real-world-physical-intelligence/)
+- 核查状态：部分核实
+- 发生了什么：官方 11 月 10 日发布机器人动作模型 Gemini Robotics 2.5，介绍奔驰产线的零件分拣概念验证，开始向合作伙伴推出。
+- 为什么重要：展示了模型进入真实工序的路径；产线试点仍有特定任务和设备条件，不代表机器人已能普遍替代人工。
+- 影响对象：开发者 / 企业 / 研究者
+- 重要性评分：8
+- 可信度：中
+- 备注：发布与推出日期 2026-11-10，时间边界不确定；试点已在公告前开展，具体日期未给出；效果为厂商报告，本次未独立核验。
+
+### 3. Google 扩大 Workspace 用户的 Gmail AI 功能范围
+
+- 来源：Google Workspace 官方更新
+- 链接：[Expanding Gemini in Gmail to more Google Workspace users](https://workspaceupdates.googleblog.com/2026/11/expanding-gemini-in-gmail-to-more-Google-Workspace-users.html)
+- 核查状态：部分核实
+- 发生了什么：Google 宣布从 11 月 10 日起逐步扩大邮件会话摘要及非个性化 Help me write，面向符合条件的成年 Workspace 用户。
+- 为什么重要：更多工作和学校账户可用 AI 读写邮件；用户和管理员可关闭，功能出现可能需要最多 15 天。
+- 影响对象：普通用户 / 企业
+- 重要性评分：7
+- 可信度：中
+- 备注：公告与推出起始日期 2026-11-10，时间边界不确定；属于已有功能扩大开放，需启用 Gmail 智能功能。
+
+### 4. IBM 与微软宣布行业 AI 智能体平台 Imagine Enterprise
+
+- 来源：Microsoft 官方联合新闻稿
+- 链接：[IBM and Microsoft announce a new AI agent platform designed for industry-specific transformation](https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation/)
+- 核查状态：部分核实
+- 发生了什么：双方 11 月 10 日宣布 Imagine Enterprise，整合咨询、云与安全技术，帮助企业构建、运行和治理行业智能体。
+- 为什么重要：初期框架覆盖金融服务、保险和零售，把部署及治理纳入交付；采购价值仍需用具体业务指标验证。
+- 影响对象：开发者 / 创业者 / 企业
+- 重要性评分：7
+- 可信度：中
+- 备注：公告与宣布日期 2026-11-10，时间边界不确定；正文称可经 IBM Consulting 部署或共同实施，也有自管选项；这支持交付方式声明，不代表客户成效已获独立验证。
 
 ## 对普通人的影响
 
-今天的重点不是某个好玩的新功能，而是 AI 基础设施和治理风险。NVIDIA 事件提醒普通用户，AI 服务背后依赖少数关键芯片和公司，一旦出现安全、合规或管理层风险，可能影响云服务价格、产品节奏和市场波动。美国 AI 安全机构的 AP 报道则说明，谁来评估高风险模型仍没有稳定答案，但其中最敏感的组织安排仍需等待官方或更多独立来源确认。对普通人来说，这意味着不要只看模型能力宣传，也要关注谁在监督、谁在供货、谁承担责任。
+Gmail 扩围公告与日常使用最相关：符合条件的成年用户可关注邮件摘要和写作辅助，需启用智能功能，逐步推出可能耗时最多 15 天。摘要中的关键承诺和日期仍应回原邮件核对。机器人试点和协议代码验证尚不能据此承诺家庭机器人普及或通信绝对安全。
 
 ## 对学习者 / 开发者的影响
 
-1. 关注 API 合规信号：xAI 文档的 `x-watermark` 响应头说明，模型输出合规信息可能成为接口字段的一部分；但这是厂商文档表述，不等同于独立验证水印效果。
-2. 学会读治理型新闻：NVIDIA 条目不是模型更新，但它会影响 AI 算力供应链；做基础设施、云服务和企业采购的人需要跟踪这类风险。
-3. 谨慎使用最新论文筛选：arXiv 的 cs.AI、cs.CL、cs.LG 最近列表在本次核查时最新批次仍为 2026-11-06，不应把周末被转发的论文当作 11 月 9 日新论文。
+1. 对照第 1 条，学习“安全规格—生成证明—机器检查”的流程，先明确验证范围；本轮未复现 AlphaProof Code。
+2. 对照第 2 条，评估机器人时分别检查任务条件、失败恢复和人员安全，勿把厂商试点效果推广到所有场景。
+3. 对照第 3 条，试用 Gmail 摘要时检查遗漏和误写，并核对账户资格及管理员设置。
 
 ## 对创业者的影响
 
-1. 算力供应链风险需要进入商业计划。NVIDIA 不是普通供应商，它的治理和监管事件会影响 AI 云成本、融资叙事和客户采购信心。
-2. “合规默认开启”会成为平台竞争点。xAI 的水印设置说明，AI 平台可能把法规要求做进默认输出，应用层创业者不能只看模型效果，也要看审计和退出机制。
-3. 独立评测会影响企业采购。CAISSI 报道显示政府评测角色仍不稳定，创业公司向企业销售 AI 系统时，要准备更透明的自测、第三方评估和风险说明。
+1. Gmail 扩围提示办公平台继续增加原生辅助功能。单纯摘要工具可能面临竞争，但本期公告不足以判断付费需求变化。
+2. Imagine Enterprise 强调行业流程与治理。团队可评估流程集成机会，采购前仍需验证部署成本与业务收益。
+3. AlphaProof Code 提供结果可检查的研发方向。安全工具应说明覆盖哪些性质、如何人工审核及能否复现；不能从厂商公告直接推导商业成熟度。
 
 ## 我的判断
 
-我的判断：今天最值得关注的不是模型参数继续变大，而是 AI 行业进入“基础设施可信度”竞争。NVIDIA 事件说明，算力公司已经处在国家安全、资本市场和企业治理的交叉点；CAISSI 报道说明，前沿模型评估的独立性仍然脆弱，但目前仍是单一媒体加匿名来源支撑；xAI 水印文档则提示合规默认化正在进入 API 层，不过不属于本期过去 24 小时主新闻。对开发者和创业者来说，下一阶段的护城河不只是调用更强模型，而是把来源、合规、可审计和供应链韧性做进产品基本功。
+我的判断：本轮四篇官方正文支持的是公告内容，而非独立验证后的技术或商业效果。值得关注的是软件证明、机器人现场任务和企业治理如何进入实际流程，但采用决策还需要验证范围、失败成本与客户成效。Gmail 扩围更接近日常用户，仍受年龄、设置和推出节奏限制。四篇页面均只有日期，时效不能精确到北京时间窗口；研究和试点也先于公告开展，不能包装为当天刚完成。Claude 原文访问失败，删除后不补条目，避免用篇数代替证据质量。
 
 ## 来源链接
 
-1. https://nvidianews.nvidia.com/news/statement-from-nvidia-board-of-directors —— 支持 NVIDIA 董事会 2026-11-08 启动独立调查、调查范围和官方措辞；页面只显示日期，未显示精确发布时间。
-2. https://apnews.com/article/nvidia-jensen-huang-investigation-chinese-spy-68839e7ca6ba2b121529f7e475e501d6 —— 支持 AP 对 NVIDIA 事件背景和 AI 芯片供应链影响的说明；页面正文可读，但本次抽取结果未显示精确发布时间。
-3. https://www.wect.com/2026/11/08/staff-us-center-ai-safety-are-reporting-white-house-raising-independence-concerns/ —— 支持 AP 署名稿关于 CAISSI 缺少常任负责人、停止公开部分研究及向白宫办公室非正式汇报的报道；页面显示 2026-11-08 1:50 PM EST，并标注 AP 版权。
-4. https://docs.x.ai/developers/advanced-api-usage/watermarking —— 支持 xAI Grok API 输出水印从 2026-11-07 起默认开启、响应头和退出设置。
-5. https://arxiv.org/list/cs.AI/recent —— 用于核对 cs.AI 最近提交列表，本次未发现 2026-11-08 或 2026-11-09 新批次。
-6. https://arxiv.org/list/cs.CL/recent —— 用于核对 cs.CL 最近提交列表，本次未发现 2026-11-08 或 2026-11-09 新批次。
-7. https://arxiv.org/list/cs.LG/recent —— 用于核对 cs.LG 最近提交列表，本次未发现 2026-11-08 或 2026-11-09 新批次。
-8. https://github.com/udgamlabs/shruti —— 用于核对 Hugging Face/开源模型候选；该仓库内容可访问，但发布帖和发布日期链条未能稳定核实，因此未收入主榜。
+1. [Introducing AlphaProof Code: a breakthrough in verifying complex software at depth](https://deepmind.google/blog/introducing-alphaproof-code/)（2026-11-10）：正文支持第 1 条的流程、四周验证周期及开放验证产物声明；未复现或检查产物。
+2. [Gemini Robotics 2.5 accelerates real-world general dexterity](https://deepmind.google/blog/gemini-robotics-2-5-accelerates-real-world-physical-intelligence/)（2026-11-10）：正文支持第 2 条的当日介绍、合作伙伴推出及产线试点声明；效果未独立验证。
+3. [Expanding Gemini in Gmail to more Google Workspace users](https://workspaceupdates.googleblog.com/2026/11/expanding-gemini-in-gmail-to-more-Google-Workspace-users.html)（2026-11-10）：正文支持第 3 条的既有功能扩围、成年条件及 11 月 10 日起最多 15 天的逐步推出安排。
+4. [IBM and Microsoft announce a new AI agent platform designed for industry-specific transformation](https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation/)（2026-11-10）：正文支持第 4 条的当日宣布、初期行业范围及交付方式；未证明实际节省成本。
 
 ## 核查说明
 
-- 本次复核使用内置网页工具逐条打开稿件列出的最终来源 URL；未使用命令行联网，也未以搜索摘要、新闻目录页或记忆替代正文。
-- NVIDIA 官方页第一次直接访问未返回正文，按允许方式通过同一机构规范结果重新打开后读到正文；AP 的 NVIDIA 原文可打开正文。该条保留。
-- AP 的 CAISSI 原 AP URL 可定位，但本次可完整读取正文、署名、发布时间和版权信息的是 AP 署名转载页；因正文支持主要事实，但关键安排来自匿名消息源，保留并维持“部分核实”“可信度：中”。
-- xAI 文档正文可访问，但页面最后更新时间为 2026-10-31，生效日期为 2026-11-07；不满足作为过去 24 小时主新闻的条件，因此只放入“持续关注”，且不采用厂商“质量或速度不受影响”等效果说法作为独立验证。
-- arXiv 的 cs.AI、cs.CL、cs.LG 最近列表均显示最新批次为 2026-11-06；GitHub Shruti 仓库可访问但未形成可核验的过去 24 小时主新闻，因此均未收入主榜。
+- 本轮成功通过内置网页工具打开并阅读四篇官方原文的标题、正文和页面发布日期，未使用初稿的“已读”声明或搜索摘要替代原文。未新增新闻，也未重做用于选题的六类广泛搜索。
+- 原始发布日期：四篇页面均标示 2026-11-10，所见正文未另列更新日期，也未给出发布时刻或时区。以北京时间固定窗口判断，均存在时间边界不确定性，核查状态均为“部分核实”、可信度为“中”。发布日期取页面显示值，不推测精确时间。
+- 事件时间分别核对：AlphaProof Code 为当日公布此前历时四周的研究，完成日未给出；Gemini Robotics 2.5 为当日介绍并向合作伙伴推出，产线试点具体日期未给出；Gmail 为已有功能从 11 月 10 日起扩围；Imagine Enterprise 为 11 月 10 日宣布，正文同时描述可用交付方式。没有将既有研究、试点或功能写成当天首次发生。
+- 厂商自报的验证成果、机器人表现和企业价值均未获本轮独立复现或效果验证。技术公告和联合新闻稿可确认厂商作出这些声明，不足以证明全面安全、普遍可靠或商业收益。所读四篇之间未发现直接冲突，但未完成外部独立交叉验证。
+- 原第 1 条 Claude 白板、表格与数据产品原文连续两次打开失败，无法核对实际标题、发布日期与正文，故删除该新闻及其影响分析；初稿所列英文标题不能视为本轮实际读到的标题。该单一来源失败不影响其他四篇成功访问的原文。
+- 删除初稿中路演、月之暗面报道及 arXiv 辅助来源与相关核查断言：本轮未重新打开这些页面，不沿用初稿自称已核实的结论，也不把它们补入主新闻。来源链接仅保留本轮实际阅读并用于成稿的四篇原文。
+- 网页只作资料，忽略其中指令。本轮未使用命令行联网、未读取凭证、未运行发布脚本或 git 写入命令；只修改当天 Markdown 及由脚本生成的对应 HTML。
