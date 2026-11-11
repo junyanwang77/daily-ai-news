@@ -90,7 +90,7 @@ def model_step(work, date, stage, folder):
     args = ['codex', '-a', 'never', 'exec', '--ignore-user-config',
             '-c', 'forced_login_method="chatgpt"', '-c', 'model_provider="openai"',
             '-c', 'web_search="live"', '-c', 'model_reasoning_effort="medium"',
-            '--model', 'gpt-5.5', '--sandbox', 'workspace-write',
+            '--sandbox', 'workspace-write',
             '--cd', str(work), '--color', 'never', '-']
     with (folder / f'{stage}.log').open('w') as log:
         subprocess.run(args, input=prompt, text=True, env=clean_env(),

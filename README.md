@@ -30,7 +30,9 @@ python3 scripts/subscription_daily.py --status
 
 ### 生产流程
 
-检查 ChatGPT 登录 → 独立临时克隆 → GPT-5.5 实时搜索生成 → 新会话逐条打开原文复核 → 输出限制和结构校验 → 生成 HTML → 更新首页与归档 → 推送 → GitHub Pages 部署。
+检查 ChatGPT 登录 → 独立临时克隆 → Codex 订阅推荐模型实时搜索生成 → 新会话逐条打开原文复核 → 输出限制和结构校验 → 生成 HTML → 更新首页与归档 → 推送 → GitHub Pages 部署。
+
+不固定旧 API 型号：Codex 根据订阅权限选择推荐模型，每次实际型号记在 generate.log 和 review.log 的开头。
 
 两次模型调用均强制 ChatGPT 身份、移除 API 环境变量、忽略个人模型配置，使用 workspace-write 沙箱。日志不包含登录凭证。模型不负责提交或发布；脚本只在校验通过后执行发布。无法联网、无合格候选、缺失文件或修改已有文件时停止，不覆盖上一期。原文复核仍由模型执行，不能保证杜绝事实错误。
 
