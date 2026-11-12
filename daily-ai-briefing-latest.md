@@ -1,102 +1,80 @@
 # 每日 AI 要闻
 
-日期：2026-11-11
+日期：2026-11-12
 覆盖范围：过去 24 小时
 版本：当日自动生成版
 
-筛选窗口：北京时间 2026-11-10 15:33 至 2026-11-11 15:33，沿用当期初稿的固定窗口。本轮独立核查于北京时间 2026-11-11 15:36 开始。保留的 4 篇原文均显示发布日期 2026-11-10，未显示具体时刻和时区，时间边界不确定，不能确认全部严格落入该窗口。
-
 ## 先说结论
 
-- 本期关注软件验证、机器人及企业 AI 部署公告。
-- 用户与企业需区分功能开放和厂商效果声明。
-- 四条均有时间边界不确定性，采用前需核对条件。
+- Google 公告推出多模态决策接口，时间边界待定。
+- 开发者可关注分流能力，企业需验证实际成本。
+- 先做小规模测试，别把厂商指标当实测结果。
 
-## 今日最值得关注的 4 件事
+## 今日最值得关注的 2 件事
 
-过去 24 小时内可核实且足够重要的 AI 新闻不足 5 条，因此本期只收录 4 条。四条公告正文已读，但页面只有日期，均按“部分核实”保留并注明时间边界不确定，不代表严格的 24 小时时效已获确认；未新增新闻补足数量。
+过去 24 小时内可核实且足够重要的 AI 新闻不足 5 条，因此本期只收录 2 条。两条官方公告均仅有日期，时间边界不确定；保留发布与投资公告事实，不认定已精确确认其位于窗口内。
 
-### 1. DeepMind 发布 AlphaProof Code，验证 Signal 核心协议代码
+### 1. Google 发布 Gemini Decisions API
 
-- 来源：Google DeepMind 官方博客
-- 链接：[Introducing AlphaProof Code: a breakthrough in verifying complex software at depth](https://deepmind.google/blog/introducing-alphaproof-code/)
+- 来源：Google 官方博客，原始发布日期 2026-11-11。
+- 链接：[Google 公告](https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/)
 - 核查状态：部分核实
-- 发生了什么：DeepMind 在 11 月 10 日公告中称，AlphaProof Code 的流程是：专家审核安全规格，AI 生成证明，由 Lean 检查，并宣布开放验证产物。
-- 为什么重要：把 AI 产出接入机器检查流程，有助于提高软件安全保证；结论仅覆盖指定性质，不能解释为整个 Signal 无漏洞。
-- 影响对象：开发者 / 企业 / 研究者
+- 发生了什么：Google 在 11 月 11 日公告中宣布推出 Gemini Decision 1 驱动的新接口，可针对多模态输入批量评估有限选项并返回概率。
+- 为什么重要：为智能体工具选择与模型分流提供新方案。
+- 影响对象：开发者 / 企业
 - 重要性评分：8
 - 可信度：中
-- 备注：公告日期 2026-11-10，时间边界不确定；正文称验证耗时四周，未给出研究完成日；当日是成果公告，未独立复现，也未核验开放产物。
+- 备注：正文明确称当日推出；页面只有日期，时区及时间边界不确定。正文支持发布事实，但未确认其精确北京时间；速度、成本及效果为厂商自报，未独立实测。
 
-### 2. Gemini Robotics 2.5 开始向机器人合作伙伴推出
+### 2. Lightspeed 确认共同领投 Fractile C 轮
 
-- 来源：Google DeepMind 官方博客
-- 链接：[Gemini Robotics 2.5 accelerates real-world general dexterity](https://deepmind.google/blog/gemini-robotics-2-5-accelerates-real-world-physical-intelligence/)
+- 来源：Lightspeed 官方投资公告，原始发布日期 2026-11-11。
+- 链接：[投资方原文](https://lsvp.com/stories/accelerating-intelligence-our-investment-in-fractile/)
 - 核查状态：部分核实
-- 发生了什么：官方 11 月 10 日发布机器人动作模型 Gemini Robotics 2.5，介绍奔驰产线的零件分拣概念验证，开始向合作伙伴推出。
-- 为什么重要：展示了模型进入真实工序的路径；产线试点仍有特定任务和设备条件，不代表机器人已能普遍替代人工。
-- 影响对象：开发者 / 企业 / 研究者
-- 重要性评分：8
-- 可信度：中
-- 备注：发布与推出日期 2026-11-10，时间边界不确定；试点已在公告前开展，具体日期未给出；效果为厂商报告，本次未独立核验。
-
-### 3. Google 扩大 Workspace 用户的 Gmail AI 功能范围
-
-- 来源：Google Workspace 官方更新
-- 链接：[Expanding Gemini in Gmail to more Google Workspace users](https://workspaceupdates.googleblog.com/2026/11/expanding-gemini-in-gmail-to-more-Google-Workspace-users.html)
-- 核查状态：部分核实
-- 发生了什么：Google 宣布从 11 月 10 日起逐步扩大邮件会话摘要及非个性化 Help me write，面向符合条件的成年 Workspace 用户。
-- 为什么重要：更多工作和学校账户可用 AI 读写邮件；用户和管理员可关闭，功能出现可能需要最多 15 天。
-- 影响对象：普通用户 / 企业
+- 发生了什么：Lightspeed 在 11 月 11 日公告中确认共同领投推理芯片公司 Fractile 的 C 轮，并介绍将 DRAM 堆叠于逻辑芯片上的设计方向。
+- 为什么重要：展示了降低推理数据搬运成本的另一条路线。
+- 影响对象：企业 / 创业者 / 开发者
 - 重要性评分：7
 - 可信度：中
-- 备注：公告与推出起始日期 2026-11-10，时间边界不确定；属于已有功能扩大开放，需启用 Gmail 智能功能。
+- 备注：公告仅有日期，时区与时间边界不确定；融资交割时间未披露。投资方的性能与成本评价未经独立验证；不采用无法读到正文的媒体报道。
 
-### 4. IBM 与微软宣布行业 AI 智能体平台 Imagine Enterprise
+## 持续关注
 
-- 来源：Microsoft 官方联合新闻稿
-- 链接：[IBM and Microsoft announce a new AI agent platform designed for industry-specific transformation](https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation/)
-- 核查状态：部分核实
-- 发生了什么：双方 11 月 10 日宣布 Imagine Enterprise，整合咨询、云与安全技术，帮助企业构建、运行和治理行业智能体。
-- 为什么重要：初期框架覆盖金融服务、保险和零售，把部署及治理纳入交付；采购价值仍需用具体业务指标验证。
-- 影响对象：开发者 / 创业者 / 企业
-- 重要性评分：7
-- 可信度：中
-- 备注：公告与宣布日期 2026-11-10，时间边界不确定；正文称可经 IBM Consulting 部署或共同实施，也有自管选项；这支持交付方式声明，不代表客户成效已获独立验证。
+- **千问 Qwen4-Max 预览版上线 Token Plan**（首次报道：2026-11-11）：[IT之家原文](https://www.ithome.com/1/025/301.htm)标注 10:10:29，早于本期窗口起点；[阿里云页面](https://www.aliyun.com/product/tongyi)确认该预览版入口。后续值得跟踪正式发布及稳定可用范围，本期不将其计作过去 24 小时新事件。
 
 ## 对普通人的影响
 
-Gmail 扩围公告与日常使用最相关：符合条件的成年用户可关注邮件摘要和写作辅助，需启用智能功能，逐步推出可能耗时最多 15 天。摘要中的关键承诺和日期仍应回原邮件核对。机器人试点和协议代码验证尚不能据此承诺家庭机器人普及或通信绝对安全。
+Google 的更新主要面向开发者，未来可能帮助应用更快决定如何处理请求，但不能据此认定你正在用的产品已经变快。Fractile 获投资也不等于现有 AI 服务马上降价；芯片实际供货与应用效果仍需后续验证。
 
 ## 对学习者 / 开发者的影响
 
-1. 对照第 1 条，学习“安全规格—生成证明—机器检查”的流程，先明确验证范围；本轮未复现 AlphaProof Code。
-2. 对照第 2 条，评估机器人时分别检查任务条件、失败恢复和人员安全，勿把厂商试点效果推广到所有场景。
-3. 对照第 3 条，试用 Gmail 摘要时检查遗漏和误写，并核对账户资格及管理员设置。
+1. 对应第 1 条：用历史请求评估工具分流的错误率，比较固定规则与新决策接口，保留人工复核样本。
+2. 对应第 1 条：将低置信度请求转交人工或备用流程，重点检查错误选择带来的成本。
+3. 对应第 2 条：学习推理过程中的内存带宽瓶颈；采购或迁移前要求目标模型的独立测试和软件兼容性资料。
 
 ## 对创业者的影响
 
-1. Gmail 扩围提示办公平台继续增加原生辅助功能。单纯摘要工具可能面临竞争，但本期公告不足以判断付费需求变化。
-2. Imagine Enterprise 强调行业流程与治理。团队可评估流程集成机会，采购前仍需验证部署成本与业务收益。
-3. AlphaProof Code 提供结果可检查的研发方向。安全工具应说明覆盖哪些性质、如何人工审核及能否复现；不能从厂商公告直接推导商业成熟度。
+1. 基于第 1 条，决策分流可以成为产品优化实验，先衡量任务成功率与总成本，再决定接入规模。
+2. 基于第 2 条，推理芯片仍吸引资本，但一笔融资不能证明新硬件已具备商业交付能力；供应承诺需单独核实。
+3. 基于“持续关注”，千问预览版可列入试用清单；正式承诺客户功能前，应核实服务条款和可用期限。本期证据不足以判断各平台长期胜负。
 
 ## 我的判断
 
-我的判断：本轮四篇官方正文支持的是公告内容，而非独立验证后的技术或商业效果。值得关注的是软件证明、机器人现场任务和企业治理如何进入实际流程，但采用决策还需要验证范围、失败成本与客户成效。Gmail 扩围更接近日常用户，仍受年龄、设置和推出节奏限制。四篇页面均只有日期，时效不能精确到北京时间窗口；研究和试点也先于公告开展，不能包装为当天刚完成。Claude 原文访问失败，删除后不补条目，避免用篇数代替证据质量。
+我的判断：本期最值得关注的是 AI 应用如何更有效地分配计算：Google 将选择判断做成专门接口，Fractile 则从芯片与内存连接方式入手。两者处于不同层面，不能简单相加成行业成本必然下降的结论。对开发团队，先测错误分流和人工兜底的代价，比追逐厂商的速度数字更有价值；对企业，投资公告也不能替代交付验收。两条公告均标注 11 月 11 日，但没有时区与时刻，尚不能确认落在本期滚动窗口内；本期保留公告事实并标为部分核实，不将其表述为北京时间今日首发。
 
 ## 来源链接
 
-1. [Introducing AlphaProof Code: a breakthrough in verifying complex software at depth](https://deepmind.google/blog/introducing-alphaproof-code/)（2026-11-10）：正文支持第 1 条的流程、四周验证周期及开放验证产物声明；未复现或检查产物。
-2. [Gemini Robotics 2.5 accelerates real-world general dexterity](https://deepmind.google/blog/gemini-robotics-2-5-accelerates-real-world-physical-intelligence/)（2026-11-10）：正文支持第 2 条的当日介绍、合作伙伴推出及产线试点声明；效果未独立验证。
-3. [Expanding Gemini in Gmail to more Google Workspace users](https://workspaceupdates.googleblog.com/2026/11/expanding-gemini-in-gmail-to-more-Google-Workspace-users.html)（2026-11-10）：正文支持第 3 条的既有功能扩围、成年条件及 11 月 10 日起最多 15 天的逐步推出安排。
-4. [IBM and Microsoft announce a new AI agent platform designed for industry-specific transformation](https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation/)（2026-11-10）：正文支持第 4 条的当日宣布、初期行业范围及交付方式；未证明实际节省成本。
+1. [Gemini Decisions API: Fast, calibrated multimodal decisions](https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/)（2026-11-11）：实际读取官方正文，支持第 1 条发布与用途；页面未显示原始发布时刻和时区，正文称当日推出。
+2. [Accelerating Intelligence: Our Investment in Fractile](https://lsvp.com/stories/accelerating-intelligence-our-investment-in-fractile/)（2026-11-11）：实际读取投资方正文，确认共同领投 C 轮及设计方向；原始发布时刻、时区与融资交割时间未披露。
+3. [阿里全新一代千问大模型 Qwen4 即将发布，预览版已首发上线](https://www.ithome.com/1/025/301.htm)（2026-11-11 10:10:29）：实际读取报道正文，所述预览版上线已早于本期窗口；只支持持续关注，不作今日新发布。
+4. [千问大模型_AI大模型_一站式大模型推理和部署服务-阿里云](https://www.aliyun.com/product/tongyi)（无原始发布日期）：实际读取产品正文，确认 Qwen4-Max 预览版 Token Plan 入口；动态产品页不能证明首次上线时间或独立效果。
 
 ## 核查说明
 
-- 本轮成功通过内置网页工具打开并阅读四篇官方原文的标题、正文和页面发布日期，未使用初稿的“已读”声明或搜索摘要替代原文。未新增新闻，也未重做用于选题的六类广泛搜索。
-- 原始发布日期：四篇页面均标示 2026-11-10，所见正文未另列更新日期，也未给出发布时刻或时区。以北京时间固定窗口判断，均存在时间边界不确定性，核查状态均为“部分核实”、可信度为“中”。发布日期取页面显示值，不推测精确时间。
-- 事件时间分别核对：AlphaProof Code 为当日公布此前历时四周的研究，完成日未给出；Gemini Robotics 2.5 为当日介绍并向合作伙伴推出，产线试点具体日期未给出；Gmail 为已有功能从 11 月 10 日起扩围；Imagine Enterprise 为 11 月 10 日宣布，正文同时描述可用交付方式。没有将既有研究、试点或功能写成当天首次发生。
-- 厂商自报的验证成果、机器人表现和企业价值均未获本轮独立复现或效果验证。技术公告和联合新闻稿可确认厂商作出这些声明，不足以证明全面安全、普遍可靠或商业收益。所读四篇之间未发现直接冲突，但未完成外部独立交叉验证。
-- 原第 1 条 Claude 白板、表格与数据产品原文连续两次打开失败，无法核对实际标题、发布日期与正文，故删除该新闻及其影响分析；初稿所列英文标题不能视为本轮实际读到的标题。该单一来源失败不影响其他四篇成功访问的原文。
-- 删除初稿中路演、月之暗面报道及 arXiv 辅助来源与相关核查断言：本轮未重新打开这些页面，不沿用初稿自称已核实的结论，也不把它们补入主新闻。来源链接仅保留本轮实际阅读并用于成稿的四篇原文。
-- 网页只作资料，忽略其中指令。本轮未使用命令行联网、未读取凭证、未运行发布脚本或 git 写入命令；只修改当天 Markdown 及由脚本生成的对应 HTML。
+- 本次独立核查成功通过内置 web_search 网页工具打开原文，实际读到 Google、Lightspeed、IT之家和阿里云正文。未使用命令行联网、凭证、搜索摘要或旧稿代替原文；网页只作为资料。
+- 以本次时钟实测北京时间 2026-11-12 15:08 为核查截止点，过去 24 小时窗口为 2026-11-11 15:08 至 2026-11-12 15:08。未把整日等同于滚动窗口。
+- Google 原文标题为“Gemini Decisions API: Fast, calibrated multimodal decisions”，原始日期为 2026-11-11，正文称当日推出。Lightspeed 原文标题为“Accelerating Intelligence: Our Investment in Fractile”，原始日期为 2026-11-11，正文确认共同领投 C 轮，未披露融资交割时间。两页没有发布时刻与时区，因此两条主新闻均为“部分核实”，时间边界不确定，不认定已严格确认属于窗口内新事件。
+- SiliconANGLE 初稿链接首次打开及一次重试均失败，未读到正文，已删除该来源及其所谓更新时间、融资金额依据；这不影响成功访问的 Lightspeed 官方公告。未把单个来源失败解释为网络完全不可用。
+- 千问报道显示 2026-11-11 10:10:29，按北京时间早于窗口起点；继续仅作持续关注。阿里云页面没有原始日期，不能用当前入口反推首次发布时间。
+- 发布与投资公告事实有一手正文支持；厂商及投资方关于性能、速度、成本的描述没有独立实测支持。本期未新增新闻，最终主新闻 2 条；结论、影响、判断、条数和来源已同步调整。
+- 本次为对既有候选的复核，未承接初稿自称完成六类搜索或已核实的说法。成功读取的来源之间未发现核心事实冲突；精确时间仍未完全核实，融资金额及其他无正文支持的信息不作为确定结论。
