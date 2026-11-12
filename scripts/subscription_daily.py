@@ -115,8 +115,13 @@ def produce(retry=False, draft_only=False):
         day.mkdir(exist_ok=True)
         status_path = day / 'status.json'
         if status_path.exists() and not retry:
-            print(status_path.read_text())
-            return
+            previous = json.loads(status_path.read_text())
+            # No model has run during preflight. Retrying on the next timer tick
+            # cannot duplicate subscription usage, unlike generate/review failures.
+            if not (previous.get('state') == 'failed' and previous.get('stage') == 'preflight'):
+                print(status_path.read_text())
+                return
+            print('生成前检查失败，自动重试；尚未消耗模型额度。')
         if status_path.exists() and json.loads(status_path.read_text()).get('state') == 'published':
             print('今天已经发布，不重复消耗订阅额度。')
             return
@@ -151,6 +156,7 @@ def produce(retry=False, draft_only=False):
             commit = run(['git', 'rev-parse', 'HEAD'], cwd=work, capture=True).stdout.strip()
             save_status(status_path, date=date, state='published', commit=commit, logs=str(folder))
         except Exception as error:
+            (folder / 'failure.txt').write_text(f'{stage}: {error}\n')
             save_status(status_path, date=date, state='failed', stage=stage,
                         error=str(error), logs=str(folder))
             raise

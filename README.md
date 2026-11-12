@@ -21,7 +21,7 @@ python3 scripts/subscription_daily.py --install
 python3 scripts/subscription_daily.py --status
 ```
 
-安装的 macOS LaunchAgent 每15分钟检查一次当天是否需要生产，08:40 到时也会触发。同一天最多自动尝试一次，避免故障反复消耗订阅额度。修复失败原因后执行 `python3 scripts/subscription_daily.py --retry` 显式重试；`--draft-only` 生成并复核但不发布。已有当天归档时不再生成。
+安装的 macOS LaunchAgent 每15分钟检查一次当天是否需要生产，08:40 到时也会触发。生成前的登录或下载项目检查失败，会在下次检查时自动重试，此时尚未调用模型。进入生成或复核后，同一天最多自动尝试一次，避免故障反复消耗订阅额度。修复失败原因后执行 `python3 scripts/subscription_daily.py --retry` 显式重试；`--draft-only` 生成并复核但不发布。已有当天归档时不再生成。
 
 - 运行记录、日志和中间稿：`~/Library/Application Support/daily-ai-news/YYYY-MM-DD/`
 - 定时配置：`~/Library/LaunchAgents/com.wangyuan.daily-ai-news.subscription.plist`

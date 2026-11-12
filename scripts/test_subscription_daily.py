@@ -53,6 +53,23 @@ class SubscriptionTests(unittest.TestCase):
                 task.produce()
                 commands.assert_not_called()
 
+    def test_preflight_network_failure_is_retried_without_model_calls(self):
+        fixed_now = dt.datetime(2026, 11, 12, 12, tzinfo=task.TZ)
+        with tempfile.TemporaryDirectory() as folder:
+            with patch.object(task, 'STATE', Path(folder)), patch.object(task, 'require_chatgpt'), \
+                    patch.object(task, 'run', side_effect=RuntimeError('SSL connection timeout')) as commands, \
+                    patch.object(task, 'model_step') as model, \
+                    patch.object(task.dt, 'datetime') as clock:
+                clock.now.return_value = fixed_now
+                for second in (0, 1):
+                    clock.now.return_value = fixed_now.replace(second=second)
+                    with self.assertRaises(RuntimeError):
+                        task.produce()
+                self.assertEqual(commands.call_count, 2)
+                model.assert_not_called()
+                status = json.loads((Path(folder) / '2026-11-12/status.json').read_text())
+                self.assertEqual(status['stage'], 'preflight')
+
 
 if __name__ == '__main__':
     unittest.main()
