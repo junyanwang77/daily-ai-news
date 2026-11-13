@@ -19,6 +19,10 @@ REMOTE = 'https://github.com/junyanwang77/daily-ai-news.git'
 TZ = ZoneInfo('Asia/Shanghai')
 
 
+class SourceVerificationError(RuntimeError):
+    """A completed review rejected all candidates; never publish this draft."""
+
+
 def clean_env():
     env = os.environ.copy()
     for key in list(env):
@@ -80,11 +84,15 @@ def install():
 def assert_outputs(work, date):
     run(['git', 'diff', '--exit-code'], cwd=work)
     run(['git', 'diff', '--cached', '--exit-code'], cwd=work)
+    markdown = work / f'daily-ai-briefing-{date}.md'
+    if markdown.is_file() and not markdown.is_symlink():
+        if '未能联网获取实时新闻' in markdown.read_text():
+            raise SourceVerificationError('原文核查未通过，拒绝发布。')
     run([sys.executable, 'check_generated_briefing.py', date], cwd=work)
     run([sys.executable, 'validate_briefing.py', date], cwd=work)
 
 
-def model_step(work, date, stage, folder):
+def model_step(work, date, stage, folder, log_name=None):
     require_chatgpt()
     prompt = (ROOT / f'prompts/subscription_{stage}.md').read_text().replace('{date}', date)
     args = ['codex', '-a', 'never', 'exec', '--ignore-user-config',
@@ -92,13 +100,13 @@ def model_step(work, date, stage, folder):
             '-c', 'web_search="live"', '-c', 'model_reasoning_effort="medium"',
             '--sandbox', 'workspace-write',
             '--cd', str(work), '--color', 'never', '-']
-    with (folder / f'{stage}.log').open('w') as log:
+    with (folder / f'{log_name or stage}.log').open('w') as log:
         subprocess.run(args, input=prompt, text=True, env=clean_env(),
                        stdout=log, stderr=subprocess.STDOUT, check=True,
                        cwd=work, timeout=1800)
 
 
-def produce(retry=False, draft_only=False):
+def produce(retry=False, draft_only=False, resume_review=False):
     now = dt.datetime.now(TZ)
     date = now.date().isoformat()
     if (now.hour, now.minute) < (8, 40):
@@ -114,8 +122,8 @@ def produce(retry=False, draft_only=False):
         day = STATE / date
         day.mkdir(exist_ok=True)
         status_path = day / 'status.json'
-        if status_path.exists() and not retry:
-            previous = json.loads(status_path.read_text())
+        previous = json.loads(status_path.read_text()) if status_path.exists() else {}
+        if previous and not retry and not resume_review:
             # No model has run during preflight. Retrying on the next timer tick
             # cannot duplicate subscription usage, unlike generate/review failures.
             if not (previous.get('state') == 'failed' and previous.get('stage') == 'preflight'):
@@ -130,6 +138,13 @@ def produce(retry=False, draft_only=False):
         work = folder / 'workspace'
         stage = 'preflight'
         try:
+            saved_draft = None
+            if resume_review:
+                if previous.get('state') != 'failed' or previous.get('stage') != 'review':
+                    raise RuntimeError('只允许从当天复核失败的任务恢复。')
+                saved_draft = Path(previous['logs']) / 'generate.md'
+                if not saved_draft.resolve().is_relative_to(day.resolve()) or saved_draft.is_symlink() or not saved_draft.is_file():
+                    raise RuntimeError('找不到安全的当天初稿，拒绝重新生成。')
             require_chatgpt()
             save_status(status_path, date=date, state='running', stage=stage, logs=str(folder))
             run(['git', 'clone', '--depth', '1', REMOTE, str(work)])
@@ -137,13 +152,32 @@ def produce(retry=False, draft_only=False):
             if archive.exists():
                 save_status(status_path, date=date, state='published', detail='远程已归档，无需再生成。')
                 return
-            for stage in ('generate', 'review'):
+            markdown = work / f'daily-ai-briefing-{date}.md'
+            if saved_draft:
+                shutil.copy2(saved_draft, markdown)
+                shutil.copy2(saved_draft, folder / 'generate.md')
+                run([sys.executable, 'make_html.py', date], cwd=work)
+                assert_outputs(work, date)
+            for stage in (('review',) if saved_draft else ('generate', 'review')):
                 save_status(status_path, date=date, state='running', stage=stage, logs=str(folder))
                 model_step(work, date, stage, folder)
                 if stage == 'review':
                     run([sys.executable, 'normalize_briefing.py', date], cwd=work)
                     run([sys.executable, 'make_html.py', date], cwd=work)
-                assert_outputs(work, date)
+                try:
+                    assert_outputs(work, date)
+                except SourceVerificationError:
+                    if stage != 'review' or saved_draft:
+                        raise
+                    # One extra review of the existing draft, never a new generation.
+                    # Quota/login/process failures do not enter this branch.
+                    shutil.copy2(markdown, folder / 'review-unpassed.md')
+                    shutil.copy2(folder / 'generate.md', markdown)
+                    run([sys.executable, 'make_html.py', date], cwd=work)
+                    model_step(work, date, stage, folder, log_name='review_retry')
+                    run([sys.executable, 'normalize_briefing.py', date], cwd=work)
+                    run([sys.executable, 'make_html.py', date], cwd=work)
+                    assert_outputs(work, date)
                 shutil.copy2(work / f'daily-ai-briefing-{date}.md', folder / f'{stage}.md')
             if draft_only:
                 save_status(status_path, date=date, state='validated_draft', logs=str(folder))
@@ -169,6 +203,7 @@ def main():
     parser.add_argument('--check', action='store_true', help='Check login and executables without a model call')
     parser.add_argument('--retry', action='store_true', help='Explicitly retry a failed/validated draft today')
     parser.add_argument('--draft-only', action='store_true')
+    parser.add_argument('--resume-review', action='store_true', help='Review the saved draft after a failed review; never regenerate')
     args = parser.parse_args()
     if args.install:
         install()
@@ -185,7 +220,7 @@ def main():
         require_chatgpt()
         print('OK: ChatGPT 登录；运行时强制订阅身份，移除 API 环境变量，不做 API 回退。')
     else:
-        produce(retry=args.retry, draft_only=args.draft_only)
+        produce(retry=args.retry, draft_only=args.draft_only, resume_review=args.resume_review)
 
 
 if __name__ == '__main__':

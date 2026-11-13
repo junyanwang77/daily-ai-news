@@ -26,6 +26,8 @@ python3 scripts/subscription_daily.py --status
 - 运行记录、日志和中间稿：`~/Library/Application Support/daily-ai-news/YYYY-MM-DD/`
 - 定时配置：`~/Library/LaunchAgents/com.wangyuan.daily-ai-news.subscription.plist`
 - 不必打开 Codex 窗口，但须保留 CLI、ChatGPT 登录和本机 GitHub 推送权限。
+- 若完成复核后所有候选因原文核查失败被剔除，自动用已保存初稿再复核一次，不重新生成；仍失败则停止。额度、登录及模型运行失败不触发此重试。一次日常生产最多一次生成、两次复核。
+- 对已停止的复核失败任务，可执行 `python3 scripts/subscription_daily.py --resume-review` 只复核当天保存的初稿；该显式恢复只做一轮复核，不额外自动重试。
 - 停用定时任务：`launchctl bootout gui/$(id -u)/com.wangyuan.daily-ai-news.subscription`
 
 ### 生产流程

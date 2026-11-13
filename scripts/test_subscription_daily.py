@@ -70,6 +70,54 @@ class SubscriptionTests(unittest.TestCase):
                 status = json.loads((Path(folder) / '2026-11-12/status.json').read_text())
                 self.assertEqual(status['stage'], 'preflight')
 
+    def test_review_retry_is_bounded_and_never_repeats_generation(self):
+        fixed_now = dt.datetime(2026, 11, 13, 12, tzinfo=task.TZ)
+        for outcome in ('recovered', 'still_unverified', 'quota_error', 'resume'):
+            with self.subTest(outcome=outcome), tempfile.TemporaryDirectory() as folder:
+                calls = []
+                root = Path(folder)
+                if outcome == 'resume':
+                    saved = root / '2026-11-13/earlier'
+                    saved.mkdir(parents=True)
+                    (saved / 'generate.md').write_text('verified draft')
+                    (saved.parent / 'status.json').write_text(json.dumps({
+                        'state': 'failed', 'stage': 'review', 'logs': str(saved)}))
+
+                def command(args, **kwargs):
+                    if args[:2] == ['git', 'clone']:
+                        Path(args[-1]).mkdir()
+                    return subprocess.CompletedProcess(args, 0, stdout='test-commit\n')
+
+                def model(work, date, stage, logs, log_name=None):
+                    calls.append(stage)
+                    if outcome == 'quota_error' and stage == 'review':
+                        raise RuntimeError('quota exceeded')
+                    rejected = stage == 'review' and outcome != 'resume' and (
+                        outcome == 'still_unverified' or log_name != 'review_retry')
+                    (work / f'daily-ai-briefing-{date}.md').write_text(
+                        '未能联网获取实时新闻' if rejected else 'verified draft')
+
+                def validate(work, date):
+                    if '未能联网获取实时新闻' in (work / f'daily-ai-briefing-{date}.md').read_text():
+                        raise task.SourceVerificationError('not verified')
+
+                with patch.object(task, 'STATE', root), patch.object(task, 'require_chatgpt'), \
+                        patch.object(task, 'run', side_effect=command) as commands, \
+                        patch.object(task, 'model_step', side_effect=model), \
+                        patch.object(task, 'assert_outputs', side_effect=validate), \
+                        patch.object(task.dt, 'datetime') as clock:
+                    clock.now.return_value = fixed_now
+                    if outcome in ('still_unverified', 'quota_error'):
+                        with self.assertRaises(RuntimeError):
+                            task.produce(draft_only=True)
+                    else:
+                        task.produce(draft_only=True, resume_review=outcome == 'resume')
+                    expected = ['review'] if outcome == 'resume' else ['generate', 'review']
+                    if outcome in ('recovered', 'still_unverified'):
+                        expected.append('review')
+                    self.assertEqual(calls, expected)
+                    self.assertFalse(any('publish.sh' in str(c) for c in commands.call_args_list))
+
 
 if __name__ == '__main__':
     unittest.main()
